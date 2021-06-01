@@ -37,64 +37,52 @@ set directory=/tmp//
 set undodir=/tmp//
 
 let mapleader=','
+call plug#begin('~/.vim/plugged')
+" Add your vim plugins here like the following:
+" Plug 'tpope/vim-sensible'
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-sensible'
+Plug 'preservim/nerdtree'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-commentary'
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rails'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'fatih/vim-go'
+Plug 'sheerun/vim-polyglot'
+Plug 'scrooloose/syntastic'
+Plug 'ngmy/vim-rubocop'
+Plug 'tpope/vim-endwise'
+Plug 'KurtPreston/vim-autoformat-rails'
+Plug 'airblade/vim-gitgutter'
+Plug 'leafgarland/typescript-vim'
+Plug 'Quramy/tsuquyomi'
+Plug 'mdempsky/gocode'
+Plug 'fatih/molokai'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'pangloss/vim-javascript'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install'  }
+Plug 'OmniSharp/omnisharp-vim'
+Plug 'rust-lang/rust.vim'
+Plug 'tomasiser/vim-code-dark'
+Plug 'cormacrelf/vim-colors-github'
+Plug 'tpope/vim-rhubarb'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'vim-test/vim-test'
+Plug 'skywind3000/asyncrun.vim'
+Plug 'tc50cal/vim-terminal'
+Plug 'morhetz/gruvbox'
+Plug 'voldikss/vim-floaterm'
+Plug 'mattn/emmet-vim'
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+call plug#end()
 
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-sensible'
-Plugin 'preservim/nerdtree'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'tpope/vim-commentary'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'tpope/vim-rails'
-Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plugin 'junegunn/fzf.vim'
-Plugin 'fatih/vim-go'
-Plugin 'sheerun/vim-polyglot'
-" Plugin 'itchyny/lightline.vim'
-Plugin 'scrooloose/syntastic'
-Plugin 'ngmy/vim-rubocop'
-Plugin 'tpope/vim-endwise'
-Plugin 'KurtPreston/vim-autoformat-rails'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'Quramy/tsuquyomi'
-Plugin 'mdempsky/gocode'
-Plugin 'fatih/molokai'
-" Plugin 'flazz/vim-colorschemes'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'vim-airline/vim-airline'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'pangloss/vim-javascript'
-Plugin 'peitalin/vim-jsx-typescript'
-Plugin 'prettier/vim-prettier', { 'do': 'yarn install'  }
-Plugin 'OmniSharp/omnisharp-vim'
-Plugin 'rust-lang/rust.vim'
-Plugin 'tomasiser/vim-code-dark'
-Plugin 'cormacrelf/vim-colors-github'
-Plugin 'tpope/vim-rhubarb'
-Plugin 'neoclide/coc.nvim', {'branch': 'release'}
-Plugin 'vim-test/vim-test'
-Plugin 'skywind3000/asyncrun.vim'
-Plugin 'tc50cal/vim-terminal'
-Plugin 'morhetz/gruvbox'
-Plugin 'voldikss/vim-floaterm'
-Plugin 'mattn/emmet-vim'
-" Plugin 'autozimu/LanguageClient-neovim', { 'do': 'bash install.sh' }
-
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
+" Add the rest of your vim settings here
 filetype plugin indent on    " required
 
 
