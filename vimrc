@@ -66,7 +66,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'pangloss/vim-javascript'
 Plug 'peitalin/vim-jsx-typescript'
-Plug 'prettier/vim-prettier', { 'do': 'yarn install'  }
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'rust-lang/rust.vim'
 Plug 'tomasiser/vim-code-dark'
@@ -78,7 +77,6 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'tc50cal/vim-terminal'
 Plug 'morhetz/gruvbox'
 Plug 'voldikss/vim-floaterm'
-Plug 'mattn/emmet-vim'
 
 call plug#end()
 
