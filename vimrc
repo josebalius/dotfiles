@@ -71,7 +71,6 @@ Plug 'rust-lang/rust.vim'
 Plug 'tomasiser/vim-code-dark'
 Plug 'cormacrelf/vim-colors-github'
 Plug 'tpope/vim-rhubarb'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-test/vim-test'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'tc50cal/vim-terminal'
@@ -85,10 +84,11 @@ filetype plugin indent on    " required
 
 
 set cursorline
-" colorscheme molokai
-" let g:airline_theme='light'
+colorscheme molokai
+let g:airline_theme='dark'
+let g:molokai_original = 1
 
-set background=light
+set background=dark
 " colorscheme molokai
 " let g:airline_theme='codedark'
 
@@ -97,9 +97,9 @@ set background=light
 " colorscheme github
 " let g:airline_theme='github'
 
-let g:gruvbox_contrast_light="hard"
-let g:gruvbox_contrast_dark='hard'
-colorscheme gruvbox
+" let g:gruvbox_contrast_light="hard"
+" let g:gruvbox_contrast_dark='hard'
+" colorscheme gruvbox
 
 map ; :Files<CR>
 noremap ft :Tags<CR>
