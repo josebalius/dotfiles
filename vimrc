@@ -76,6 +76,7 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'tc50cal/vim-terminal'
 Plug 'morhetz/gruvbox'
 Plug 'voldikss/vim-floaterm'
+Plug 'fxn/vim-monochrome'
 
 call plug#end()
 
@@ -84,7 +85,7 @@ filetype plugin indent on    " required
 
 
 set cursorline
-colorscheme molokai
+colorscheme monochrome 
 let g:airline_theme='dark'
 let g:molokai_original = 1
 
@@ -165,3 +166,9 @@ let g:airline_powerline_fonts = 1
 let test#strategy='floaterm'
 let g:floaterm_wintype='split'
 let g:user_emmet_leader_key='<C-h>'
+
+" don't allow colorschemes to set a background color
+highlight Normal ctermbg=NONE
+highlight nonText ctermbg=NONE
+highlight String ctermfg=green guifg=green
+
