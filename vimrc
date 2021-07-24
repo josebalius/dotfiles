@@ -30,7 +30,6 @@ set ttyfast
 set clipboard=unnamed
 set hlsearch
 nnoremap <F3> :set hlsearch!<CR>
-nnoremap hh :set hlsearch!<CR>
 
 set backupdir=/tmp//
 set directory=/tmp//
@@ -170,4 +169,4 @@ let g:user_emmet_leader_key='<C-h>'
 " don't allow colorschemes to set a background color
 highlight Normal ctermbg=NONE
 highlight nonText ctermbg=NONE
-highlight String ctermfg=green guifg=green
+highlight String ctermfg=white guifg=white
