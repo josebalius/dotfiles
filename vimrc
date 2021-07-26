@@ -75,7 +75,7 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'tc50cal/vim-terminal'
 Plug 'morhetz/gruvbox'
 Plug 'voldikss/vim-floaterm'
-Plug 'fxn/vim-monochrome'
+Plug 'doums/darcula'
 
 call plug#end()
 
@@ -84,7 +84,7 @@ filetype plugin indent on    " required
 
 
 set cursorline
-colorscheme monochrome 
+colorscheme darcula 
 let g:airline_theme='dark'
 let g:molokai_original = 1
 
@@ -166,7 +166,4 @@ let test#strategy='floaterm'
 let g:floaterm_wintype='split'
 let g:user_emmet_leader_key='<C-h>'
 
-" don't allow colorschemes to set a background color
-highlight Normal ctermbg=NONE
-highlight nonText ctermbg=NONE
-highlight String ctermfg=white guifg=white
+call darcula#Hi('Constant', ['#9876AA', 103], ['#2B2B2B', 235])
