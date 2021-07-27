@@ -167,4 +167,3 @@ let g:floaterm_wintype='split'
 let g:user_emmet_leader_key='<C-h>'
 
 call darcula#Hi('Constant', ['#9876AA', 103], ['#2B2B2B', 235])
-hi Normal ctermfg=black guifg=black
