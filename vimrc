@@ -84,7 +84,7 @@ filetype plugin indent on    " required
 
 
 set cursorline
-colorscheme darcula 
+colorscheme codedark 
 let g:airline_theme='dark'
 let g:molokai_original = 1
 
@@ -166,4 +166,4 @@ let test#strategy='floaterm'
 let g:floaterm_wintype='split'
 let g:user_emmet_leader_key='<C-h>'
 
-call darcula#Hi('Constant', ['#9876AA', 103], ['#2B2B2B', 235])
+" call darcula#Hi('Constant', ['#9876AA', 103], ['#2B2B2B', 235])
