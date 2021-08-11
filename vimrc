@@ -76,6 +76,8 @@ Plug 'tc50cal/vim-terminal'
 Plug 'morhetz/gruvbox'
 Plug 'voldikss/vim-floaterm'
 Plug 'doums/darcula'
+Plug 'arcticicestudio/nord-vim'
+
 
 call plug#end()
 
@@ -85,8 +87,8 @@ filetype plugin indent on    " required
 
 set cursorline
 let g:codedark_conservative = 1
-colorscheme codedark
-let g:airline_theme='codedark'
+colorscheme nord 
+let g:airline_theme='nord'
 let g:molokai_original = 1
 
 set background=dark
