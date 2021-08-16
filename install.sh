@@ -10,6 +10,5 @@ ln -s $(pwd)/vim $HOME/.vim
 ln -s $(pwd)/emacs $HOME/.emacs
 ln -s $(pwd)/screenrc $HOME/.screenrc
 
-vim -Es -u $HOME/.vimrc -c "PlugInstall | qa"
-
 apt-get install silversearcher-ag
+vim -Es -u $HOME/.vimrc -c "PlugInstall | qa"
