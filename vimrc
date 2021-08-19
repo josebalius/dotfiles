@@ -77,7 +77,7 @@ Plug 'morhetz/gruvbox'
 Plug 'voldikss/vim-floaterm'
 Plug 'doums/darcula'
 Plug 'arcticicestudio/nord-vim'
-Plugin 'kkga/vim-envy'
+Plug 'kkga/vim-envy'
 
 
 call plug#end()
