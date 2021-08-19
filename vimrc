@@ -109,7 +109,7 @@ let g:molokai_original = 1
 map ; :Files<CR>
 noremap ft :Tags<CR>
 noremap fd :Ag<CR>
-let $BAT_THEME = 'ansi-light'
+let $BAT_THEME = 'GitHub'
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
