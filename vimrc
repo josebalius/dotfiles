@@ -78,6 +78,7 @@ Plug 'voldikss/vim-floaterm'
 Plug 'doums/darcula'
 Plug 'arcticicestudio/nord-vim'
 Plug 'kkga/vim-envy'
+Plug 'cocopon/iceberg.vim'
 
 
 call plug#end()
@@ -88,9 +89,9 @@ filetype plugin indent on    " required
 
 set cursorline
 let g:codedark_conservative = 1
-set background=light
-colorscheme envy 
-let g:airline_theme='sol'
+set background=dark
+colorscheme iceberg 
+" let g:airline_theme='sol'
 let g:molokai_original = 1
 
 " set background=dark
