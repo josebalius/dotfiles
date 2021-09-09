@@ -14,13 +14,12 @@ if &term =~ '^screen'
 endif
 set timeoutlen=1000 ttimeoutlen=0
 
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+set termguicolors
+
 syntax on
-" set guioptions=
-" set t_Co=256
 syntax enable
-" let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-" let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-" set termguicolors
 
 " don't render special chars (tabs, trails, ...)
 set nolist
