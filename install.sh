@@ -15,3 +15,5 @@ ln -s $(pwd)/bash_profile $HOME/.bash_profile
 
 sudo apt-get --assume-yes install silversearcher-ag bat
 vim -Es -u $HOME/.vimrc -c "PlugInstall | qa"
+
+sudo chsh -s "$(which zsh)" "$(whoami)"
