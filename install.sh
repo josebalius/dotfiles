@@ -11,6 +11,7 @@ ln -s $(pwd)/emacs $HOME/.emacs
 ln -s $(pwd)/screenrc $HOME/.screenrc
 rm -f $HOME/.zshrc
 ln -s $(pwd)/zshrc $HOME/.zshrc
+ln -s $(pwd)/.bash_profile $HOME/.bash_profile
 
 sudo apt-get --assume-yes install silversearcher-ag bat
 vim -Es -u $HOME/.vimrc -c "PlugInstall | qa"
