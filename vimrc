@@ -88,9 +88,9 @@ filetype plugin indent on    " required
 
 set cursorline
 let g:codedark_conservative = 1
-" set background=dark
-colorscheme envy 
-let g:airline_theme='sol'
+set background=dark
+colorscheme iceberg 
+" let g:airline_theme='sol'
 let g:molokai_original = 1
 
 " set background=dark
