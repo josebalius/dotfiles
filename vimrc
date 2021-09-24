@@ -90,6 +90,7 @@ set cursorline
 let g:codedark_conservative = 1
 " set background=dark
 colorscheme envy
+autocmd ColorScheme envy highlight rubySymbol ctermfg=black guifg=black
 let g:airline_theme='sol'
 let g:molokai_original = 1
 
