@@ -89,14 +89,14 @@ filetype plugin indent on    " required
 set cursorline
 let g:codedark_conservative = 1
 " set background=dark
-colorscheme envy
-autocmd ColorScheme envy highlight rubySymbol ctermfg=black guifg=black
-let g:airline_theme='sol'
+" colorscheme envy
+" autocmd ColorScheme envy highlight rubySymbol ctermfg=black guifg=black
+" let g:airline_theme='sol'
 let g:molokai_original = 1
 
-" set background=dark
-" colorscheme molokai
-" let g:airline_theme='codedark'
+set background=dark
+colorscheme molokai
+let g:airline_theme='codedark'
 
 " let g:github_colors_soft = 1
 " let g:github_colors_block_diffmark = 0
@@ -110,7 +110,7 @@ let g:molokai_original = 1
 map ; :Files<CR>
 noremap ft :Tags<CR>
 noremap fd :Ag<CR>
-let $BAT_THEME = 'GitHub'
+" let $BAT_THEME = 'GitHub'
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
