@@ -97,6 +97,8 @@ let g:molokai_original = 1
 set background=dark
 colorscheme molokai
 let g:airline_theme='codedark'
+highlight rubySymbol ctermfg=white guifg=white
+highlight rubyException ctermfg=white guifg=white
 
 " let g:github_colors_soft = 1
 " let g:github_colors_block_diffmark = 0
