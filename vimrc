@@ -90,19 +90,19 @@ set cursorline
 let g:codedark_conservative = 1
 
 " ENVY THEME SETTINGS
-colorscheme envy
-let g:airline_theme='sol'
-let $BAT_THEME = 'GitHub'
-highlight rubySymbol ctermfg=black guifg=black
+" colorscheme envy
+" let g:airline_theme='sol'
+" let $BAT_THEME = 'GitHub'
+" highlight rubySymbol ctermfg=black guifg=black
 
 " MOLOKAI THEME SETTINGS
-" let g:molokai_original = 1
-" set background=dark
-" colorscheme molokai
-" let g:airline_theme='codedark'
-" highlight rubySymbol ctermfg=white guifg=white
-" highlight rubyException ctermfg=white guifg=white
-" highlight LineNr ctermfg=white guifg=white
+let g:molokai_original = 1
+set background=dark
+colorscheme molokai
+let g:airline_theme='codedark'
+highlight rubySymbol ctermfg=white guifg=white
+highlight rubyException ctermfg=white guifg=white
+highlight LineNr ctermfg=white guifg=white
 
 " let g:github_colors_soft = 1
 " let g:github_colors_block_diffmark = 0
