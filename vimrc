@@ -91,9 +91,9 @@ let g:codedark_conservative = 1
 
 " ENVY THEME SETTINGS
 colorscheme envy
-autocmd ColorScheme envy highlight rubySymbol ctermfg=black guifg=black
 let g:airline_theme='sol'
 let $BAT_THEME = 'GitHub'
+highlight rubySymbol ctermfg=black guifg=black
 
 " MOLOKAI THEME SETTINGS
 " let g:molokai_original = 1
