@@ -14,9 +14,9 @@ if &term =~ '^screen'
 endif
 set timeoutlen=1000 ttimeoutlen=0
 
-" let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-" let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-" set termguicolors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+set termguicolors
 
 syntax on
 syntax enable
@@ -96,13 +96,22 @@ let g:codedark_conservative = 1
 " highlight rubySymbol ctermfg=black guifg=black
 
 " MOLOKAI THEME SETTINGS
-let g:molokai_original = 1
+" let g:molokai_original = 1
+" set background=dark
+" colorscheme molokai
+" let g:airline_theme='codedark'
+" highlight rubySymbol ctermfg=white guifg=white
+" highlight rubyException ctermfg=white guifg=white
+" highlight LineNr ctermfg=white guifg=white
+
+" DARCULA
 set background=dark
-colorscheme molokai
+colorscheme darcula 
 let g:airline_theme='codedark'
-highlight rubySymbol ctermfg=white guifg=white
-highlight rubyException ctermfg=white guifg=white
-highlight LineNr ctermfg=white guifg=white
+call darcula#Hi('Normal', darcula#palette.fg, ['#1A1B1E', 235])
+call darcula#Hi('LineNr', darcula#palette.lineNumber, ['#1A1B1E', 235])
+call darcula#Hi('SignColumn', darcula#palette.lineNumber, ['#1A1B1E', 235])
+
 
 " let g:github_colors_soft = 1
 " let g:github_colors_block_diffmark = 0
