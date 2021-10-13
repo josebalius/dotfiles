@@ -107,16 +107,16 @@ let g:codedark_conservative = 1
 " highlight LineNr ctermfg=white guifg=white
 
 " DARCULA
-" set background=dark
-" colorscheme darcula 
-" let g:airline_theme='codedark'
-" call darcula#Hi('Normal', darcula#palette.fg, ['#1A1B1E', 235])
-" call darcula#Hi('LineNr', darcula#palette.lineNumber, ['#1A1B1E', 235])
-" call darcula#Hi('SignColumn', darcula#palette.lineNumber, ['#1A1B1E', 235])
+set background=dark
+colorscheme darcula 
+let g:airline_theme='codedark'
+call darcula#Hi('Normal', darcula#palette.fg, ['#1A1B1E', 235])
+call darcula#Hi('LineNr', darcula#palette.lineNumber, ['#1A1B1E', 235])
+call darcula#Hi('SignColumn', darcula#palette.lineNumber, ['#1A1B1E', 235])
 
 " XCODE
-colorscheme xcodelighthc 
-hi MatchParen guifg=#1f1f24 guibg=#fef937 gui=NONE cterm=NONE
+"colorscheme xcodelighthc 
+" hi MatchParen guifg=#1f1f24 guibg=#fef937 gui=NONE cterm=NONE
 
 
 " let g:github_colors_soft = 1
