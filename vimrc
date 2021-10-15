@@ -98,6 +98,7 @@ highlight rubyMacro cterm=bold gui=bold ctermfg=black guifg=black
 highlight rubyClassBlock cterm=bold gui=bold ctermfg=black guifg=black
 highlight rubyControl cterm=bold gui=bold ctermfg=black guifg=black
 highlight CursorLine cterm=none
+highlight CursorLineNr cterm=bold
 
 " colorscheme github
 " let $BAT_THEME = 'GitHub'
