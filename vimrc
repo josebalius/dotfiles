@@ -67,7 +67,6 @@ Plug 'peitalin/vim-jsx-typescript'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'rust-lang/rust.vim'
 Plug 'tomasiser/vim-code-dark'
-Plug 'cormacrelf/vim-colors-github'
 Plug 'tpope/vim-rhubarb'
 Plug 'vim-test/vim-test'
 Plug 'skywind3000/asyncrun.vim'
@@ -79,7 +78,7 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'kkga/vim-envy'
 Plug 'cocopon/iceberg.vim'
 Plug 'arzg/vim-colors-xcode'
-
+Plug 'endel/vim-github-colorscheme'
 
 
 call plug#end()
@@ -90,6 +89,13 @@ filetype plugin indent on    " required
 
 set cursorline
 let g:codedark_conservative = 1
+
+colorscheme github
+let $BAT_THEME = 'GitHub'
+highlight rubyDefine cterm=bold gui=bold ctermfg=black guifg=black
+highlight rubyMacro cterm=bold gui=bold ctermfg=black guifg=black
+highlight rubyClassBlock cterm=bold gui=bold ctermfg=black guifg=black
+highlight CursorLine cterm=none
 
 " ENVY THEME SETTINGS
 " colorscheme envy
@@ -107,12 +113,12 @@ let g:codedark_conservative = 1
 " highlight LineNr ctermfg=white guifg=white
 
 " DARCULA
-set background=dark
-colorscheme darcula 
-let g:airline_theme='codedark'
-call darcula#Hi('Normal', darcula#palette.fg, ['#1A1B1E', 235])
-call darcula#Hi('LineNr', darcula#palette.lineNumber, ['#1A1B1E', 235])
-call darcula#Hi('SignColumn', darcula#palette.lineNumber, ['#1A1B1E', 235])
+" set background=dark
+" colorscheme darcula 
+" let g:airline_theme='codedark'
+" call darcula#Hi('Normal', darcula#palette.fg, ['#1A1B1E', 235])
+" call darcula#Hi('LineNr', darcula#palette.lineNumber, ['#1A1B1E', 235])
+" call darcula#Hi('SignColumn', darcula#palette.lineNumber, ['#1A1B1E', 235])
 
 " XCODE
 "colorscheme xcodelighthc 
