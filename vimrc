@@ -79,7 +79,7 @@ Plug 'kkga/vim-envy'
 Plug 'cocopon/iceberg.vim'
 Plug 'arzg/vim-colors-xcode'
 Plug 'endel/vim-github-colorscheme'
-
+Plug 'YorickPeterse/vim-paper'
 
 call plug#end()
 
@@ -90,12 +90,16 @@ filetype plugin indent on    " required
 set cursorline
 let g:codedark_conservative = 1
 
-colorscheme github
+colorscheme paper 
+let g:airline_theme='sol'
 let $BAT_THEME = 'GitHub'
-highlight rubyDefine cterm=bold gui=bold ctermfg=black guifg=black
-highlight rubyMacro cterm=bold gui=bold ctermfg=black guifg=black
-highlight rubyClassBlock cterm=bold gui=bold ctermfg=black guifg=black
-highlight CursorLine cterm=none
+
+" colorscheme github
+" let $BAT_THEME = 'GitHub'
+" highlight rubyDefine cterm=bold gui=bold ctermfg=black guifg=black
+" highlight rubyMacro cterm=bold gui=bold ctermfg=black guifg=black
+" highlight rubyClassBlock cterm=bold gui=bold ctermfg=black guifg=black
+" highlight CursorLine cterm=none
 
 " ENVY THEME SETTINGS
 " colorscheme envy
