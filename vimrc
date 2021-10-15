@@ -99,6 +99,7 @@ highlight rubyClassBlock cterm=bold gui=bold ctermfg=black guifg=black
 highlight rubyControl cterm=bold gui=bold ctermfg=black guifg=black
 highlight rubyExceptionHandler cterm=bold gui=bold ctermfg=black guifg=black
 highlight rubyConditional cterm=bold gui=bold ctermfg=black guifg=black
+highlight rubyClass cterm=bold gui=bold ctermfg=black guifg=black
 highlight CursorLine cterm=none
 highlight CursorLineNr cterm=bold
 
