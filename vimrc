@@ -93,6 +93,11 @@ let g:codedark_conservative = 1
 colorscheme paper 
 let g:airline_theme='sol'
 let $BAT_THEME = 'GitHub'
+highlight rubyDefine cterm=bold gui=bold ctermfg=black guifg=black
+highlight rubyMacro cterm=bold gui=bold ctermfg=black guifg=black
+highlight rubyClassBlock cterm=bold gui=bold ctermfg=black guifg=black
+highlight rubyControl cterm=bold gui=bold ctermfg=black guifg=black
+highlight CursorLine cterm=none
 
 " colorscheme github
 " let $BAT_THEME = 'GitHub'
