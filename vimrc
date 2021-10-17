@@ -217,11 +217,11 @@ endif
 
 let g:airline_section_b=''
 let g:airline_section_c='%f'
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 0
 let airline#extensions#tabline#tabs_label = ''
 let airline#extensions#tabline#show_splits = 0
 let airline#extensions#tabline#show_buffers = 0
-let g:airline_powerline_fonts = 1 
+let g:airline_powerline_fonts = 0
 
 let test#strategy='floaterm'
 let g:floaterm_wintype='split'
