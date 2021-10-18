@@ -90,18 +90,18 @@ filetype plugin indent on    " required
 set cursorline
 let g:codedark_conservative = 1
 
-colorscheme paper 
-let g:airline_theme='sol'
-let $BAT_THEME = 'GitHub'
-highlight rubyDefine cterm=bold gui=bold ctermfg=black guifg=black
-highlight rubyMacro cterm=bold gui=bold ctermfg=black guifg=black
-highlight rubyClassBlock cterm=bold gui=bold ctermfg=black guifg=black
-highlight rubyControl cterm=bold gui=bold ctermfg=black guifg=black
-highlight rubyExceptionHandler cterm=bold gui=bold ctermfg=black guifg=black
-highlight rubyConditional cterm=bold gui=bold ctermfg=black guifg=black
-highlight rubyClass cterm=bold gui=bold ctermfg=black guifg=black
-highlight CursorLine cterm=none
-highlight CursorLineNr cterm=bold
+" colorscheme paper 
+" let g:airline_theme='sol'
+" let $BAT_THEME = 'GitHub'
+" highlight rubyDefine cterm=bold gui=bold ctermfg=black guifg=black
+" highlight rubyMacro cterm=bold gui=bold ctermfg=black guifg=black
+" highlight rubyClassBlock cterm=bold gui=bold ctermfg=black guifg=black
+" highlight rubyControl cterm=bold gui=bold ctermfg=black guifg=black
+" highlight rubyExceptionHandler cterm=bold gui=bold ctermfg=black guifg=black
+" highlight rubyConditional cterm=bold gui=bold ctermfg=black guifg=black
+" highlight rubyClass cterm=bold gui=bold ctermfg=black guifg=black
+" highlight CursorLine cterm=none
+" highlight CursorLineNr cterm=bold
 
 " colorscheme github
 " let $BAT_THEME = 'GitHub'
@@ -111,10 +111,10 @@ highlight CursorLineNr cterm=bold
 " highlight CursorLine cterm=none
 
 " ENVY THEME SETTINGS
-" colorscheme envy
-" let g:airline_theme='sol'
-" let $BAT_THEME = 'GitHub'
-" highlight rubySymbol ctermfg=black guifg=black
+colorscheme envy
+let g:airline_theme='sol'
+let $BAT_THEME = 'GitHub'
+highlight rubySymbol ctermfg=black guifg=black
 
 " MOLOKAI THEME SETTINGS
 " let g:molokai_original = 1
