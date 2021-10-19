@@ -115,6 +115,7 @@ colorscheme envy
 let g:airline_theme='sol'
 let $BAT_THEME = 'GitHub'
 highlight rubySymbol ctermfg=black guifg=black
+highlight Normal ctermbg=white guibg=white
 
 " MOLOKAI THEME SETTINGS
 " let g:molokai_original = 1
