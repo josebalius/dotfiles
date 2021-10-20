@@ -111,11 +111,11 @@ let g:codedark_conservative = 1
 " highlight CursorLine cterm=none
 
 " ENVY THEME SETTINGS
-colorscheme envy
-let g:airline_theme='sol'
-let $BAT_THEME = 'GitHub'
-highlight rubySymbol ctermfg=black guifg=black
-highlight Normal ctermbg=white guibg=white
+" colorscheme envy
+" let g:airline_theme='sol'
+" let $BAT_THEME = 'GitHub'
+" highlight rubySymbol ctermfg=black guifg=black
+" highlight Normal ctermbg=white guibg=white
 
 " MOLOKAI THEME SETTINGS
 " let g:molokai_original = 1
@@ -127,12 +127,12 @@ highlight Normal ctermbg=white guibg=white
 " highlight LineNr ctermfg=white guifg=white
 
 " DARCULA
-" set background=dark
-" colorscheme darcula 
-" let g:airline_theme='codedark'
-" call darcula#Hi('Normal', darcula#palette.fg, ['#1A1B1E', 235])
-" call darcula#Hi('LineNr', darcula#palette.lineNumber, ['#1A1B1E', 235])
-" call darcula#Hi('SignColumn', darcula#palette.lineNumber, ['#1A1B1E', 235])
+set background=dark
+colorscheme darcula 
+let g:airline_theme='codedark'
+call darcula#Hi('Normal', darcula#palette.fg, ['#1A1B1E', 235])
+call darcula#Hi('LineNr', darcula#palette.lineNumber, ['#1A1B1E', 235])
+call darcula#Hi('SignColumn', darcula#palette.lineNumber, ['#1A1B1E', 235])
 
 " XCODE
 "colorscheme xcodelighthc 
