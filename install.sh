@@ -28,7 +28,7 @@ sudo usermod -a -G fuse "$(whoami)"
 wget https://github.com/github/copilot.vim/releases/download/neovim-nightlies/appimage.zip
 unzip appimage.zip
 sudo chmod u+x nvim.appimage
-mv nvim.appimage /usr/local/bin/nvim
+sudo mv nvim.appimage /usr/local/bin/nvim
 
 ln -s $(pwd)/tmux.conf $HOME/.tmux.conf
 ln -s $(pwd)/vimrc $HOME/.vimrc
