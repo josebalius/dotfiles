@@ -80,6 +80,7 @@ Plug 'cocopon/iceberg.vim'
 Plug 'arzg/vim-colors-xcode'
 Plug 'endel/vim-github-colorscheme'
 Plug 'YorickPeterse/vim-paper'
+Plug 'tpope/vim-vividchalk'
 
 call plug#end()
 
@@ -89,6 +90,8 @@ filetype plugin indent on    " required
 
 set cursorline
 let g:codedark_conservative = 1
+
+colorscheme vividchalk
 
 " colorscheme paper 
 " let g:airline_theme='sol'
@@ -127,12 +130,12 @@ let g:codedark_conservative = 1
 " highlight LineNr ctermfg=white guifg=white
 
 " DARCULA
-set background=dark
-colorscheme darcula 
-let g:airline_theme='codedark'
-call darcula#Hi('Normal', darcula#palette.fg, ['#1A1B1E', 235])
-call darcula#Hi('LineNr', darcula#palette.lineNumber, ['#1A1B1E', 235])
-call darcula#Hi('SignColumn', darcula#palette.lineNumber, ['#1A1B1E', 235])
+" set background=dark
+" colorscheme darcula 
+" let g:airline_theme='codedark'
+" call darcula#Hi('Normal', darcula#palette.fg, ['#1A1B1E', 235])
+" call darcula#Hi('LineNr', darcula#palette.lineNumber, ['#1A1B1E', 235])
+" call darcula#Hi('SignColumn', darcula#palette.lineNumber, ['#1A1B1E', 235])
 
 " XCODE
 "colorscheme xcodelighthc 

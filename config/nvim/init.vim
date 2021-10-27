@@ -64,7 +64,7 @@ Plug 'wojciechkepka/vim-github-dark'
 Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'arcticicestudio/nord-vim'
-Plug 'github/copilot-vim'
+Plug 'github/copilot.vim'
 Plug 'doums/darcula'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'arzg/vim-colors-xcode'
@@ -73,10 +73,13 @@ Plug 'YorickPeterse/vim-paper'
 Plug 'morhetz/gruvbox'
 Plug 'kkga/vim-envy'
 Plug 'fatih/molokai'
+Plug 'tpope/vim-vividchalk'
 
 call plug#end()
 
 filetype plugin indent on
+
+colorscheme vividchalk
 
 " lua require('github-theme').setup()
 " colorscheme nord
@@ -105,12 +108,12 @@ filetype plugin indent on
 " colorscheme gruvbox
 
 " DARCULA
-set background=dark
-colorscheme darcula 
-let g:airline_theme='jellybeans'
-call darcula#Hi('Normal', darcula#palette.fg, ['#1A1B1E', 235])
-call darcula#Hi('LineNr', darcula#palette.lineNumber, ['#1A1B1E', 235])
-call darcula#Hi('SignColumn', darcula#palette.lineNumber, ['#1A1B1E', 235])
+" set background=dark
+" colorscheme darcula 
+" let g:airline_theme='jellybeans'
+" call darcula#Hi('Normal', darcula#palette.fg, ['#1A1B1E', 235])
+" call darcula#Hi('LineNr', darcula#palette.lineNumber, ['#1A1B1E', 235])
+" call darcula#Hi('SignColumn', darcula#palette.lineNumber, ['#1A1B1E', 235])
 
 map ; :Files<CR>
 noremap ft :Tags<CR>
