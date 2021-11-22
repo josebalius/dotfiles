@@ -80,7 +80,7 @@ call plug#end()
 
 filetype plugin indent on
 
-colorscheme vividchalk
+" colorscheme vividchalk
 
 " lua require('github-theme').setup()
 " colorscheme nord
@@ -102,8 +102,8 @@ colorscheme vividchalk
 " colorscheme github
 " highlight SignColumn guibg=#eeeeee
 
-" colorscheme xcodelighthc 
-" hi MatchParen guifg=#1f1f24 guibg=#fef937 gui=NONE cterm=NONE
+colorscheme xcodelighthc 
+hi MatchParen guifg=#1f1f24 guibg=#fef937 gui=NONE cterm=NONE
 
 " let g:gruvbox_contrast_light='medium'
 " colorscheme gruvbox
