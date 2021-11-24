@@ -85,9 +85,9 @@ filetype plugin indent on
 " lua require('github-theme').setup()
 " colorscheme nord
 
-" colorscheme paper 
-" let g:airline_theme='sol'
-" let $BAT_THEME = 'GitHub'
+colorscheme paper 
+let g:airline_theme='sol'
+let $BAT_THEME = 'GitHub'
 
 
 " let g:molokai_original=1
@@ -102,9 +102,9 @@ filetype plugin indent on
 " colorscheme github
 " highlight SignColumn guibg=#eeeeee
 
-colorscheme xcodelighthc 
-hi MatchParen guifg=#1f1f24 guibg=#fef937 gui=NONE cterm=NONE
-let $BAT_THEME = 'GitHub'
+" colorscheme xcodelighthc 
+" hi MatchParen guifg=#1f1f24 guibg=#fef937 gui=NONE cterm=NONE
+" let $BAT_THEME = 'GitHub'
 
 " let g:gruvbox_contrast_light='medium'
 " colorscheme gruvbox
