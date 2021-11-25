@@ -85,10 +85,11 @@ filetype plugin indent on
 " lua require('github-theme').setup()
 " colorscheme nord
 
-colorscheme paper 
-let g:airline_theme='sol'
-let $BAT_THEME = 'GitHub'
+" colorscheme paper 
+" let g:airline_theme='sol'
+" let $BAT_THEME = 'GitHub'
 
+colorscheme vividchalk
 
 " let g:molokai_original=1
 " set background=dark
