@@ -89,7 +89,6 @@ filetype plugin indent on
 " let g:airline_theme='sol'
 " let $BAT_THEME = 'GitHub'
 
-colorscheme vividchalk
 
 " let g:molokai_original=1
 " set background=dark
@@ -103,9 +102,9 @@ colorscheme vividchalk
 " colorscheme github
 " highlight SignColumn guibg=#eeeeee
 
-" colorscheme xcodelighthc 
-" hi MatchParen guifg=#1f1f24 guibg=#fef937 gui=NONE cterm=NONE
-" let $BAT_THEME = 'GitHub'
+colorscheme xcodelighthc 
+hi MatchParen guifg=#1f1f24 guibg=#fef937 gui=NONE cterm=NONE
+let $BAT_THEME = 'GitHub'
 
 " let g:gruvbox_contrast_light='medium'
 " colorscheme gruvbox
