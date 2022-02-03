@@ -102,20 +102,20 @@ filetype plugin indent on
 " colorscheme github
 " highlight SignColumn guibg=#eeeeee
 
-colorscheme xcodelighthc 
-hi MatchParen guifg=#1f1f24 guibg=#fef937 gui=NONE cterm=NONE
-let $BAT_THEME = 'GitHub'
+' colorscheme xcodelighthc 
+" hi MatchParen guifg=#1f1f24 guibg=#fef937 gui=NONE cterm=NONE
+" let $BAT_THEME = 'GitHub'
 
 " let g:gruvbox_contrast_light='medium'
 " colorscheme gruvbox
 
 " DARCULA
-" set background=dark
-" colorscheme darcula 
-" let g:airline_theme='jellybeans'
-" call darcula#Hi('Normal', darcula#palette.fg, ['#1A1B1E', 235])
-" call darcula#Hi('LineNr', darcula#palette.lineNumber, ['#1A1B1E', 235])
-" call darcula#Hi('SignColumn', darcula#palette.lineNumber, ['#1A1B1E', 235])
+set background=dark
+colorscheme darcula 
+let g:airline_theme='jellybeans'
+call darcula#Hi('Normal', darcula#palette.fg, ['#1A1B1E', 235])
+call darcula#Hi('LineNr', darcula#palette.lineNumber, ['#1A1B1E', 235])
+call darcula#Hi('SignColumn', darcula#palette.lineNumber, ['#1A1B1E', 235])
 
 map ; :Files<CR>
 noremap ft :Tags<CR>
