@@ -9,6 +9,8 @@ PACKAGES_NEEDED="\
     silversearcher-ag \
     bat \
     fuse \
+    dialog \
+    apt-utils \
     libfuse2"
 
 if ! dpkg -s ${PACKAGES_NEEDED} > /dev/null 2>&1; then
