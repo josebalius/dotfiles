@@ -185,12 +185,17 @@ augroup omnisharp_commands
   " Note that the type is echoed to the Vim command line, and will overwrite
   " any other messages in this space including e.g. ALE linting messages.
   autocmd CursorHold *.cs OmniSharpTypeLookup
+  
+  command! -bang -nargs=* Ag
+    \ call fzf#vim#ag(<q-args>,
+    \ '--unrestricted --ignore-dir=.git',
+    \ fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
 
   " The following commands are contextual, based on the cursor position.
   autocmd FileType cs nmap <silent> <buffer> gd <Plug>(omnisharp_go_to_definition)
   autocmd FileType cs inoremap <silent> <C-]> <Plug>(omnisharp_go_to_definition)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>osfu <Plug>(omnisharp_find_usages)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>osfi <Plug>(omnisharp_find_implementations)
+  autocmd FileType cs nmap <silent> fu <Plug>(omnisharp_find_usages)
+  autocmd FileType cs nmap <silent> fip <Plug>(omnisharp_find_implementations)
   autocmd FileType cs nmap <silent> <buffer> <Leader>ospd <Plug>(omnisharp_preview_definition)
   autocmd FileType cs nmap <silent> <buffer> <Leader>ospi <Plug>(omnisharp_preview_implementations)
   autocmd FileType cs nmap <silent> <buffer> <Leader>ost <Plug>(omnisharp_type_lookup)
