@@ -193,7 +193,7 @@ augroup omnisharp_commands
 
   " The following commands are contextual, based on the cursor position.
   autocmd FileType cs nmap <silent> <buffer> gd <Plug>(omnisharp_go_to_definition)
-  autocmd FileType cs inoremap <silent> <C-]> <Plug>(omnisharp_go_to_definition)
+  autocmd FileType cs nmap <silent> <C-]> <Plug>(omnisharp_go_to_definition)
   autocmd FileType cs nmap <silent> fu <Plug>(omnisharp_find_usages)
   autocmd FileType cs nmap <silent> fip <Plug>(omnisharp_find_implementations)
   autocmd FileType cs nmap <silent> <buffer> <Leader>ospd <Plug>(omnisharp_preview_definition)
