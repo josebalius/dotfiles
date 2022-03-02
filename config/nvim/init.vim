@@ -148,19 +148,8 @@ nmap <silent> gd <Plug>(coc-definition)
 noremap tf :TestFile<CR>
 noremap tn :TestNearest<CR>
 
-nnoremap <silent> <2-LeftMouse> :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hls<cr>:CountWord<cr>
-nnoremap <Leader>* :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hls<cr>:CountWord<cr>
-
-if !exists('*CountWordFunction')
-    fun! CountWordFunction()
-        try
-            let l:win_view = winsaveview()
-            exec "%s/" . expand("<cword>") . "//gn"
-        finally
-            call winrestview(l:win_view)
-        endtry
-    endfun
-endif
+nnoremap <silent> <2-LeftMouse> :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hls<cr>
+nnoremap <Leader>* :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hls<cr>
 
 
 set expandtab
@@ -195,11 +184,6 @@ let g:go_fmt_command = "goimports"
 
 augroup omnisharp_commands
   autocmd!
-
-  " Show type information automatically when the cursor stops moving.
-  " Note that the type is echoed to the Vim command line, and will overwrite
-  " any other messages in this space including e.g. ALE linting messages.
-  autocmd CursorHold *.cs OmniSharpTypeLookup
   
   command! -bang -nargs=* Ag
     \ call fzf#vim#ag(<q-args>,
