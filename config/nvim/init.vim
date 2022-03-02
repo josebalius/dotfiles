@@ -148,6 +148,21 @@ nmap <silent> gd <Plug>(coc-definition)
 noremap tf :TestFile<CR>
 noremap tn :TestNearest<CR>
 
+nnoremap <silent> <2-LeftMouse> :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hls<cr>:CountWord<cr>
+nnoremap <Leader>* :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hls<cr>:CountWord<cr>
+
+if !exists('*CountWordFunction')
+    fun! CountWordFunction()
+        try
+            let l:win_view = winsaveview()
+            exec "%s/" . expand("<cword>") . "//gn"
+        finally
+            call winrestview(l:win_view)
+        endtry
+    endfun
+endif
+
+
 set expandtab
 autocmd Filetype typescript setlocal tabstop=2
 autocmd Filetype typescript setlocal shiftwidth=2
