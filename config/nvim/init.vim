@@ -77,7 +77,7 @@ Plug 'fatih/molokai'
 Plug 'tpope/vim-vividchalk'
 Plug 'ojroques/vim-oscyank'
 Plug 'OmniSharp/omnisharp-vim'
-
+Plug 'tomasiser/vim-code-dark'
 
 
 call plug#end()
@@ -120,6 +120,10 @@ let g:airline_theme='jellybeans'
 call darcula#Hi('Normal', darcula#palette.fg, ['#1A1B1E', 235])
 call darcula#Hi('LineNr', darcula#palette.lineNumber, ['#1A1B1E', 235])
 call darcula#Hi('SignColumn', darcula#palette.lineNumber, ['#1A1B1E', 235])
+
+" set background=dark
+" let g:codedark_conservative = 1
+" colorscheme codedark
 
 map ; :Files<CR>
 noremap ft :Tags<CR>
