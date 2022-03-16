@@ -27,7 +27,7 @@ set nolist
 set lazyredraw
 set ttyfast
 set clipboard=unnamed
-set colorcolumn=80
+set colorcolumn=0
 " set hlsearch
 nnoremap <F3> :set hlsearch!<CR>
 
