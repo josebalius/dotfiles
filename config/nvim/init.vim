@@ -186,6 +186,7 @@ let test#strategy='floaterm'
 let g:floaterm_wintype='split'
 let g:go_fmt_command = "goimports"
 
+let g:OmniSharp_highlighting = 0
 augroup omnisharp_commands
   autocmd!
   
