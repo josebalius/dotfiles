@@ -84,7 +84,7 @@ call plug#end()
 
 filetype plugin indent on
 
-" colorscheme vividchalk
+colorscheme vividchalk
 
 " lua require('github-theme').setup()
 " colorscheme nord
@@ -114,12 +114,12 @@ filetype plugin indent on
 " colorscheme gruvbox
 
 " DARCULA
-set background=dark
-colorscheme darcula 
-let g:airline_theme='jellybeans'
-call darcula#Hi('Normal', darcula#palette.fg, ['#1A1B1E', 235])
-call darcula#Hi('LineNr', darcula#palette.lineNumber, ['#1A1B1E', 235])
-call darcula#Hi('SignColumn', darcula#palette.lineNumber, ['#1A1B1E', 235])
+" set background=dark
+" colorscheme darcula 
+" let g:airline_theme='jellybeans'
+" call darcula#Hi('Normal', darcula#palette.fg, ['#1A1B1E', 235])
+" call darcula#Hi('LineNr', darcula#palette.lineNumber, ['#1A1B1E', 235])
+" call darcula#Hi('SignColumn', darcula#palette.lineNumber, ['#1A1B1E', 235])
 
 " set background=dark
 " let g:codedark_conservative = 1
