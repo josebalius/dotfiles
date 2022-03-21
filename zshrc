@@ -100,3 +100,13 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+# vim
+alias v='nvim'
+alias swap='cd ~/.local/share/nvim/swap'
+# git
+alias gs='git status'
+alias master='git checkout master && git pull'
+alias main='git checkout main && git pull'
+alias gco='git checkout'
+alias nb='git checkout -b'
+alias yeet='git stash'

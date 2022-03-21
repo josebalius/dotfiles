@@ -1,6 +1,5 @@
 # Codespaces Dotfiles Template
 
-Test
 This repo is a starting point for using custom dotfiles (terminal / editor configuration) with GitHub Codespaces
 
 ## How to use this repo
@@ -15,17 +14,9 @@ In order to use this template,
 
 ## What's in here?
 
-Just some blank configuration files for popular Text User Interface (TUI) apps that folks may want to use for development in codespaces and a script to put them in the right place.
-
-This supports the following tools:
-
-* Tmux
-* Screen
-* Vim
-* Emacs
+Updated .vimrc and .zshrc to match my preferred settings.
 
 ## Vim Plugins
 
 This repo uses the wonderful [Vim Plug](https://github.com/junegunn/vim-plug) tool to manage vim plugins. If you'd like to add plugins, simply add them between the opening and closing plug statements in the `vimrc` file.
 
-## My dotfiles

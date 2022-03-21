@@ -41,7 +41,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
-Plug 'preservim/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
 Plug 'vim-ruby/vim-ruby'
@@ -151,9 +151,7 @@ colorscheme vividchalk
 " let g:gruvbox_contrast_dark='hard'
 " colorscheme gruvbox
 
-map ; :Files<CR>
-noremap ft :Tags<CR>
-noremap fd :Ag<CR>
+inoremap jk <Esc>
 
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
 let g:fzf_colors =
@@ -191,6 +189,9 @@ au BufWrite ruby silent! call AutoFormatRails()
 nmap <silent> gd <Plug>(coc-definition)
 noremap tf :TestFile<CR>
 noremap tn :TestNearest<CR>
+map <C-n> :NERDTreeToggle<CR>
+noremap <leader>y "+y
+noremap <leader>p "+p
 
 let g:vimrubocop_config = '~/github/github/.rubocop.yml'
 let g:neocomplete#enable_at_startup = 1
