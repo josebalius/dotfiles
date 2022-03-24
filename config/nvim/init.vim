@@ -154,6 +154,7 @@ noremap tf :TestFile<CR>
 noremap tn :TestNearest<CR>
 noremap <F5> :GoBuild<CR>
 noremap <Leader>q :q<CR>
+noremap <Leader>t :<C-u>tabnew<CR>
 
 
 nnoremap <silent> <2-LeftMouse> :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hls<cr>
