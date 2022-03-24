@@ -151,6 +151,7 @@ au BufWrite ruby silent! call AutoFormatRails()
 nmap <silent> gd <Plug>(coc-definition)
 noremap tf :TestFile<CR>
 noremap tn :TestNearest<CR>
+noremap <F5> :GoBuild<CR>
 
 nnoremap <silent> <2-LeftMouse> :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hls<cr>
 nnoremap <Leader>* :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hls<cr>
