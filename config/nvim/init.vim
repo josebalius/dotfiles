@@ -78,6 +78,7 @@ Plug 'tpope/vim-vividchalk'
 Plug 'ojroques/vim-oscyank'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'tomasiser/vim-code-dark'
+Plug 'ctrlpvim/ctrlp.vim'
 
 
 call plug#end()
@@ -152,6 +153,8 @@ nmap <silent> gd <Plug>(coc-definition)
 noremap tf :TestFile<CR>
 noremap tn :TestNearest<CR>
 noremap <F5> :GoBuild<CR>
+noremap <Leader>q :q<CR>
+
 
 nnoremap <silent> <2-LeftMouse> :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hls<cr>
 nnoremap <Leader>* :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hls<cr>
