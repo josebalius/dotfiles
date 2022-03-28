@@ -153,8 +153,11 @@ nmap <silent> gd <Plug>(coc-definition)
 noremap tf :TestFile<CR>
 noremap tn :TestNearest<CR>
 noremap <F5> :GoBuild<CR>
+noremap <Leader>b :w<CR>:GoBuild<CR>
 noremap <Leader>q :q<CR>
 noremap <Leader>t :<C-u>tabnew<CR>
+noremap <Leader>w :w<CR>
+
 
 
 nnoremap <silent> <2-LeftMouse> :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hls<cr>
