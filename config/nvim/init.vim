@@ -79,13 +79,16 @@ Plug 'ojroques/vim-oscyank'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'tomasiser/vim-code-dark'
 Plug 'ctrlpvim/ctrlp.vim'
-
+Plug 'robertmeta/nofrils'
 
 call plug#end()
 
 filetype plugin indent on
 
-colorscheme vividchalk
+" colorscheme vividchalk
+
+colorscheme nofrils-dark
+highlight Normal guibg=black ctermbg=black
 
 " lua require('github-theme').setup()
 " colorscheme nord
@@ -171,8 +174,8 @@ autocmd Filetype css setlocal tabstop=2
 autocmd Filetype css setlocal shiftwidth=2
 autocmd Filetype javascript setlocal tabstop=2
 autocmd Filetype javascript setlocal shiftwidth=2
-autocmd Filetype go setlocal tabstop=2
-autocmd Filetype go setlocal shiftwidth=2
+autocmd Filetype go setlocal tabstop=4
+autocmd Filetype go setlocal shiftwidth=4
 autocmd Filetype scss setlocal tabstop=2
 autocmd Filetype scss setlocal shiftwidth=2
 autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
