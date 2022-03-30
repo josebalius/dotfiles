@@ -60,7 +60,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'vim-test/vim-test'
 Plug 'voldikss/vim-floaterm'
 Plug 'vim-ruby/vim-ruby'
-Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline'
 Plug 'wojciechkepka/vim-github-dark'
 Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
