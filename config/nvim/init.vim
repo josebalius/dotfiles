@@ -85,10 +85,10 @@ call plug#end()
 
 filetype plugin indent on
 
-" colorscheme vividchalk
+colorscheme vividchalk
 
-colorscheme nofrils-dark
-highlight Normal guibg=black ctermbg=black
+" colorscheme nofrils-dark
+" highlight Normal guibg=black ctermbg=black
 
 " lua require('github-theme').setup()
 " colorscheme nord
