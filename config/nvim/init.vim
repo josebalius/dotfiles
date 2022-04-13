@@ -166,6 +166,10 @@ noremap <Leader>w :w<CR>
 nnoremap <silent> <2-LeftMouse> :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hls<cr>
 nnoremap <Leader>* :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hls<cr>
 
+autocmd InsertEnter * set guicursor=i:ver100-iCursor
+autocmd InsertEnter * set guicursor+=i:blinkon100
+
+
 
 set expandtab
 autocmd Filetype typescript setlocal tabstop=2
