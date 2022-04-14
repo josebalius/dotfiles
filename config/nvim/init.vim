@@ -190,6 +190,8 @@ au FileType javascript setl indentexpr=
 autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | execute 'OSCYankReg "' | endif
 let g:oscyank_term = 'tmux'
 
+let g:coc_global_extensions = ['coc-go', 'coc-yank']
+
 
 let g:airline_section_b=''
 let g:airline_section_c='%f'
