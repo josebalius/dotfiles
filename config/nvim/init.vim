@@ -160,6 +160,8 @@ noremap <Leader>b :w<CR>:GoBuild<CR>
 noremap <Leader>q :q<CR>
 noremap <Leader>t :<C-u>tabnew<CR>
 noremap <Leader>w :w<CR>
+noremap <Leader>im :GoImplements<CR>
+
 
 
 
