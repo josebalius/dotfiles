@@ -86,6 +86,7 @@ call plug#end()
 filetype plugin indent on
 
 colorscheme vividchalk
+highlight StatusLine guibg=#FFFFFF guifg=#000000
 
 " colorscheme nofrils-dark
 " highlight Normal guibg=black ctermbg=black
