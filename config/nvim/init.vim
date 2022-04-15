@@ -85,7 +85,7 @@ call plug#end()
 
 filetype plugin indent on
 
-colorscheme pablo
+colorscheme vividchalk
 
 " colorscheme nofrils-dark
 " highlight Normal guibg=black ctermbg=black
