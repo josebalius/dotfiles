@@ -8,7 +8,7 @@ set completeopt-=preview
 set mouse+=a
 set autoread
 set timeoutlen=1000 ttimeoutlen=0
-set cursorline
+" set cursorline
 set guicursor=i:block
 
 syntax on 
