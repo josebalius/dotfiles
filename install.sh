@@ -11,6 +11,7 @@ PACKAGES_NEEDED="\
     fuse \
     dialog \
     apt-utils \
+    npm \
     libfuse2"
 
 if ! dpkg -s ${PACKAGES_NEEDED} > /dev/null 2>&1; then
