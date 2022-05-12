@@ -206,6 +206,9 @@ let g:airline_powerline_fonts = 0
 let test#strategy='floaterm'
 let g:floaterm_wintype='split'
 let g:go_fmt_command = "goimports"
+let g:go_doc_popup_window = 1
+let g:go_code_completion_enabled = 1
+
 
 let g:OmniSharp_highlighting = 0
 augroup omnisharp_commands
