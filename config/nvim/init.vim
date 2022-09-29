@@ -63,7 +63,7 @@ Plug 'vim-ruby/vim-ruby'
 " Plug 'vim-airline/vim-airline'
 Plug 'wojciechkepka/vim-github-dark'
 Plug 'sheerun/vim-polyglot'
-Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+" Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'arcticicestudio/nord-vim'
 Plug 'github/copilot.vim'
 Plug 'doums/darcula'
@@ -87,6 +87,8 @@ filetype plugin indent on
 
 colorscheme vividchalk
 highlight StatusLine guibg=#FFFFFF guifg=#000000
+highlight MatchParen guibg=#74FFFF guifg=#FFFFFF
+
 
 " colorscheme nofrils-dark
 " highlight Normal guibg=black ctermbg=black
@@ -171,8 +173,8 @@ noremap <Leader>c :GoCallers<CR>
 nnoremap <silent> <2-LeftMouse> :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hls<cr>
 nnoremap <Leader>* :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hls<cr>
 
-autocmd InsertEnter * set guicursor=i:ver100-iCursor
-autocmd InsertEnter * set guicursor+=i:blinkon100
+" autocmd InsertEnter * set guicursor=i:ver100-iCursor
+" autocmd InsertEnter * set guicursor+=i:blinkon100
 
 
 
@@ -195,8 +197,6 @@ let g:oscyank_term = 'tmux'
 
 " let g:coc_global_extensions = ['coc-go', 'coc-yank']
 
-
-
 let g:airline_section_b=''
 let g:airline_section_c='%f'
 let g:airline#extensions#tabline#enabled = 1
@@ -210,49 +210,3 @@ let g:floaterm_wintype='split'
 let g:go_fmt_command = "goimports"
 let g:go_doc_popup_window = 1
 let g:go_code_completion_enabled = 1
-
-
-let g:OmniSharp_highlighting = 0
-augroup omnisharp_commands
-  autocmd!
-  
-  command! -bang -nargs=* Ag
-    \ call fzf#vim#ag(<q-args>,
-    \ '--unrestricted --ignore-dir=.git',
-    \ fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
-
-  " The following commands are contextual, based on the cursor position.
-  autocmd FileType cs nmap <silent> <buffer> gd <Plug>(omnisharp_go_to_definition)
-  autocmd FileType cs nmap <silent> <C-]> <Plug>(omnisharp_go_to_definition)
-  autocmd FileType cs nmap <silent> <C-LeftMouse> <Plug>(omnisharp_go_to_definition)
-  autocmd FileType cs nmap <silent> fu <Plug>(omnisharp_find_usages)
-  autocmd FileType cs nmap <silent> fip <Plug>(omnisharp_find_implementations)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>pd <Plug>(omnisharp_preview_definition)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>pi <Plug>(omnisharp_preview_implementations)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>ost <Plug>(omnisharp_type_lookup)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>osd <Plug>(omnisharp_documentation)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>osfs <Plug>(omnisharp_find_symbol)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>osfx <Plug>(omnisharp_fix_usings)
-  autocmd FileType cs nmap <silent> <buffer> <C-\> <Plug>(omnisharp_signature_help)
-  autocmd FileType cs imap <silent> <buffer> <C-\> <Plug>(omnisharp_signature_help)
-
-  " Navigate up and down by method/property/field
-  autocmd FileType cs nmap <silent> <buffer> [[ <Plug>(omnisharp_navigate_up)
-  autocmd FileType cs nmap <silent> <buffer> ]] <Plug>(omnisharp_navigate_down)
-  " Find all code errors/warnings for the current solution and populate the quickfix window
-  autocmd FileType cs nmap <silent> <buffer> <Leader>osgcc <Plug>(omnisharp_global_code_check)
-  " Contextual code actions (uses fzf, vim-clap, CtrlP or unite.vim selector when available)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>osca <Plug>(omnisharp_code_actions)
-  autocmd FileType cs xmap <silent> <buffer> <Leader>osca <Plug>(omnisharp_code_actions)
-  " Repeat the last code action performed (does not use a selector)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>os. <Plug>(omnisharp_code_action_repeat)
-  autocmd FileType cs xmap <silent> <buffer> <Leader>os. <Plug>(omnisharp_code_action_repeat)
-
-  autocmd FileType cs nmap <silent> <buffer> <Leader>os= <Plug>(omnisharp_code_format)
-
-  autocmd FileType cs nmap <silent> <buffer> <Leader>osnm <Plug>(omnisharp_rename)
-
-  autocmd FileType cs nmap <silent> <buffer> <Leader>osre <Plug>(omnisharp_restart_server)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>osst <Plug>(omnisharp_start_server)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>ossp <Plug>(omnisharp_stop_server)
-augroup END
