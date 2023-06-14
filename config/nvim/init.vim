@@ -27,7 +27,7 @@ set nolist
 set lazyredraw
 set ttyfast
 set clipboard=unnamed
-set colorcolumn=0
+set colorcolumn=120
 " set hlsearch
 nnoremap <F3> :set hlsearch!<CR>
 
@@ -75,20 +75,29 @@ Plug 'morhetz/gruvbox'
 Plug 'kkga/vim-envy'
 Plug 'fatih/molokai'
 Plug 'tpope/vim-vividchalk'
-Plug 'ojroques/vim-oscyank'
+Plug 'ojroques/vim-oscyank', { 'commit': 'e6298736a7835bcb365dd45a8e8bfe86d935c1f8' }
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'tomasiser/vim-code-dark'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'robertmeta/nofrils'
 Plug 'neovim/nvim-lspconfig'
+" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'owickstrom/vim-colors-paramount'
+Plug 'wolverian/minimal'
+Plug 'eihigh/vim-aomi-grayscale'
+Plug 'yasukotelin/notelight'
+
 
 call plug#end()
 
 filetype plugin indent on
 
-colorscheme vividchalk
-highlight StatusLine guibg=#FFFFFF guifg=#000000
-highlight MatchParen guibg=#74FFFF guifg=#FFFFFF
+colorscheme github 
+highlight String ctermfg=246 guifg=#8B0000
+let $BAT_THEME = 'GitHub'
+
+" highlight StatusLine guibg=#FFFFFF guifg=#000000
+" highlight MatchParen guibg=#74FFFF guifg=#FFFFFF
 
 
 " colorscheme nofrils-dark
@@ -114,7 +123,7 @@ highlight MatchParen guibg=#74FFFF guifg=#FFFFFF
 " colorscheme github
 " highlight SignColumn guibg=#eeeeee
 
-" colorscheme xcodelighthc 
+" colorscheme xcodelight
 " hi MatchParen guifg=#1f1f24 guibg=#fef937 gui=NONE cterm=NONE
 " let $BAT_THEME = 'GitHub'
 
@@ -136,7 +145,12 @@ highlight MatchParen guibg=#74FFFF guifg=#FFFFFF
 map ; :Files<CR>
 noremap ft :Tags<CR>
 noremap fd :Ag<CR>
+noremap gg :GGrep<CR>
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep(
+  \   'git grep --line-number -- '.shellescape(<q-args>),
+  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
 
 noremap ff :BTags<CR>
 noremap vv :<C-u>vsplit<CR>
@@ -203,6 +217,11 @@ let g:go_fmt_command = "goimports"
 let g:go_doc_popup_window = 1
 let g:go_code_completion_enabled = 1
 
+let g:go_highlight_extra_types = 0
+let g:go_highlight_string_spellcheck = 0
+let g:go_highlight_format_strings = 0
+
+
 lua << EOF
 local opts = { noremap=true, silent=true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
@@ -245,4 +264,35 @@ require'lspconfig'.sorbet.setup{
     flags = lsp_flags,
 }
 EOF
+
+" function! SetupTreeSitter()
+" lua << EOF
+" require 'nvim-treesitter.configs'.setup {
+"   -- One of "all", "maintained" (parsers with maintainers), or a list of languages
+"   ensure_installed = { "ruby" },
+  
+"   -- Install languages synchronously (only applied to `ensure_installed`)
+"   sync_install = true,
+
+"   -- Automatically install missing parsers when entering buffer
+"   -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+"   auto_install = true,
+
+"   highlight = {
+"     disable = { "go" },
+"     -- `false` will disable the whole extension
+"     enable = true,
+"     additional_vim_regex_highlighting = false,
+
+"     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+"     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+"     -- Using this option may slow down your editor, and you may see some duplicate highlights.
+"     -- Instead of true it can also be a list of languages
+"   },
+" }
+" EOF
+" endfunction
+
+" call SetupTreeSitter()
+
 
