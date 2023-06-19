@@ -300,14 +300,6 @@ EOF
 lua << EOF
 vim.o.background = "light"
 
-require('text-to-colorscheme').setup {
-  ai = {
-    openai_api_key = "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",
-    gpt_model = "gpt-3.5-turbo"
-  },
-}
-EOF
-
 function! SynGroup()
     let l:s = synID(line('.'), col('.'), 1)
     echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
