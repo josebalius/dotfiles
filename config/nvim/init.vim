@@ -86,14 +86,16 @@ Plug 'owickstrom/vim-colors-paramount'
 Plug 'wolverian/minimal'
 Plug 'eihigh/vim-aomi-grayscale'
 Plug 'yasukotelin/notelight'
+Plug 'svermeulen/text-to-colorscheme.nvim'
+Plug 'josebalius/vim-light-chromeclipse'
 
 
 call plug#end()
 
 filetype plugin indent on
 
-colorscheme github 
-highlight String ctermfg=246 guifg=#8B0000
+colorscheme light-chromeclipse 
+" highlight String ctermfg=246 guifg=#8B0000
 let $BAT_THEME = 'GitHub'
 
 " highlight StatusLine guibg=#FFFFFF guifg=#000000
@@ -269,7 +271,7 @@ EOF
 " lua << EOF
 " require 'nvim-treesitter.configs'.setup {
 "   -- One of "all", "maintained" (parsers with maintainers), or a list of languages
-"   ensure_installed = { "ruby" },
+"   ensure_installed = { "ruby", "go" },
   
 "   -- Install languages synchronously (only applied to `ensure_installed`)
 "   sync_install = true,
@@ -279,7 +281,7 @@ EOF
 "   auto_install = true,
 
 "   highlight = {
-"     disable = { "go" },
+"     -- disable = { "go" },
 "     -- `false` will disable the whole extension
 "     enable = true,
 "     additional_vim_regex_highlighting = false,
@@ -295,4 +297,19 @@ EOF
 
 " call SetupTreeSitter()
 
+lua << EOF
+vim.o.background = "light"
+
+require('text-to-colorscheme').setup {
+  ai = {
+    openai_api_key = "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",
+    gpt_model = "gpt-3.5-turbo"
+  },
+}
+EOF
+
+function! SynGroup()
+    let l:s = synID(line('.'), col('.'), 1)
+    echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
+endfun
 
