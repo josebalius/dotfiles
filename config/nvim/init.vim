@@ -297,9 +297,6 @@ EOF
 
 " call SetupTreeSitter()
 
-lua << EOF
-vim.o.background = "light"
-
 function! SynGroup()
     let l:s = synID(line('.'), col('.'), 1)
     echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
