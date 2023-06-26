@@ -302,3 +302,9 @@ function! SynGroup()
     echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
 endfun
 
+function! Dark()
+  colorscheme nofrils-dark
+  hi Normal guibg=#0D0D0D
+endfun
+
+
