@@ -94,7 +94,15 @@ call plug#end()
 
 filetype plugin indent on
 
-colorscheme light-chromeclipse 
+colorscheme nofrils-light
+hi Normal guibg=#F7F8FA
+hi Keyword guifg=#CE232E
+hi Conditional guifg=#CE232E
+hi Statement guifg=#CE232E
+hi Repeat guifg=#CE232E
+hi Label guifg=#CE232E
+hi Constant guifg=#215FB5
+hi Type guifg=#215FB5
 " highlight String ctermfg=246 guifg=#8B0000
 let $BAT_THEME = 'GitHub'
 
