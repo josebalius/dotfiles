@@ -8,7 +8,7 @@ set completeopt-=preview
 set mouse+=a
 set autoread
 set timeoutlen=1000 ttimeoutlen=0
-" set cursorline
+set cursorline
 set guicursor=i:block
 
 syntax on 
@@ -313,6 +313,25 @@ endfun
 function! Dark()
   colorscheme nofrils-dark
   hi Normal guibg=#0D0D0D
+endfun
+
+function! Light()
+  colorscheme nofrils-light
+  hi Normal guibg=#F7F8FA
+
+  hi Keyword gui=bold
+  hi Conditional gui=bold 
+  hi Statement gui=bold
+  hi Repeat gui=bold
+  hi Label gui=bold
+  " hi Keyword guifg=#CE232E
+  " hi Conditional guifg=#CE232E
+  " hi Statement guifg=#CE232E
+  " hi Repeat guifg=#CE232E
+  " hi Label guifg=#CE232E
+
+  hi Constant guifg=#215FB5
+  hi Type guifg=#215FB5
 endfun
 
 
