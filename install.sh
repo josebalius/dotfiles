@@ -49,7 +49,5 @@ ln -s "$(pwd)/config/nvim" "$HOME/.config/nvim"
 
 nvim +'PlugInstall --sync' +qa
 
-vim -Es -u $HOME/.vimrc -c "PlugInstall | qa"
-
 sudo chsh -s "$(which zsh)" "$(whoami)"
 
