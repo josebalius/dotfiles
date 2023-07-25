@@ -314,7 +314,7 @@ endfun
 
 function! Dark()
   colorscheme nofrils-dark
-  hi Normal guibg=#0D0D0D
+  hi Normal guibg=#000000 guifg=#FFFFFF
 endfun
 
 function! Light()
