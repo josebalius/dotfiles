@@ -96,17 +96,17 @@ call plug#end()
 
 filetype plugin indent on
 
-colorscheme nofrils-light
-hi Normal guibg=#F7F8FA
-hi Keyword guifg=#CE232E
-hi Conditional guifg=#CE232E
-hi Statement guifg=#CE232E
-hi Repeat guifg=#CE232E
-hi Label guifg=#CE232E
-hi Constant guifg=#215FB5
-hi Type guifg=#215FB5
+" colorscheme nofrils-light
+" hi Normal guibg=#F7F8FA
+" hi Keyword guifg=#CE232E
+" hi Conditional guifg=#CE232E
+" hi Statement guifg=#CE232E
+" hi Repeat guifg=#CE232E
+" hi Label guifg=#CE232E
+" hi Constant guifg=#215FB5
+" hi Type guifg=#215FB5
 " highlight String ctermfg=246 guifg=#8B0000
-let $BAT_THEME = 'GitHub'
+" let $BAT_THEME = 'GitHub'
 
 " highlight StatusLine guibg=#FFFFFF guifg=#000000
 " highlight MatchParen guibg=#74FFFF guifg=#FFFFFF
@@ -150,9 +150,9 @@ let $BAT_THEME = 'GitHub'
 " call darcula#Hi('LineNr', darcula#palette.lineNumber, ['#1A1B1E', 235])
 " call darcula#Hi('SignColumn', darcula#palette.lineNumber, ['#1A1B1E', 235])
 
-" set background=dark
+set background=dark
 " let g:codedark_conservative = 1
-" colorscheme codedark
+colorscheme codedark
 
 map ; :Files<CR>
 noremap ft :Tags<CR>
