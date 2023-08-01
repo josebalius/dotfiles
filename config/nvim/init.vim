@@ -38,6 +38,7 @@ Plug 'fatih/vim-go'                " Go plugin
 Plug 'preservim/nerdtree'          " File browser
 Plug 'airblade/vim-gitgutter'      " Git gutter
 Plug 'github/copilot.vim'          " Copilot
+Plug 'ojroques/nvim-osc52'         " Copy to clipboard
 
 Plug 'christoomey/vim-tmux-navigator' " tmux navigation
 
@@ -45,9 +46,12 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " fuzzy finder
 Plug 'junegunn/fzf.vim'
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " treesitter
+Plug 'nvim-treesitter/playground'                           " treesitter playground
 
 " Themes
 Plug 'josebalius/darcula-dark.nvim' " darcula theme
+Plug 'tomasiser/vim-code-dark'      " code dark theme
+Plug 'robertmeta/nofrils'           " no frills theme
 
 call plug#end()
 " end Plug
@@ -55,8 +59,6 @@ call plug#end()
 " Theme
 colorscheme darcula-dark
 hi VertSplit guifg=#3f3f3f guibg=#2B2B2B
-" hi VertSplit guifg=#3f3f3f guibg=#1A1B1E
-" hi Normal guibg=#1A1B1E
 
 " Indentation
 filetype plugin indent on " ensure we can configure filetype indent settings
@@ -100,8 +102,8 @@ noremap <C-K> <C-W><C-K>
 noremap <C-L> <C-W><C-L>
 nnoremap <F3> :set hlsearch!<CR>
 
-noremap gt :GoTest<CR>
-noremap gf :GoTestFunc<CR>
+noremap gt :w <CR>:GoTest<CR>
+noremap gf :w <CR>:GoTestFunc<CR>
 noremap <Leader>b :w<CR>:GoBuild<CR>
 noremap <Leader>im :GoImplements<CR>
 noremap <Leader>ref :GoReferrers<CR>
@@ -133,6 +135,10 @@ require 'nvim-treesitter.configs'.setup {
     -- Instead of true it can also be a list of languages
   },
 }
+
+vim.keymap.set('n', '<leader>c', require('osc52').copy_operator, {expr = true})
+vim.keymap.set('n', '<leader>cc', '<leader>c_', {remap = true})
+vim.keymap.set('v', '<leader>c', require('osc52').copy_visual)
 EOF
 
 function! SynGroup()
@@ -147,15 +153,15 @@ endfun
 
 function! Light()
   colorscheme nofrils-light
-  hi Normal guibg=#F7F8FA
+  hi Normal guibg=#F7F8F8 guifg=#000000
 
   hi Keyword gui=bold
   hi Conditional gui=bold 
   hi Statement gui=bold
   hi Repeat gui=bold
   hi Label gui=bold
-  hi Constant guifg=#215FB5
-  hi Type guifg=#215FB5
+  " hi Constant guifg=#215FB5
+  " hi Type guifg=#215FB5
 endfun
 
 " Go plugin settings
@@ -165,5 +171,6 @@ let g:go_code_completion_enabled = 1
 let g:go_highlight_extra_types = 0
 let g:go_highlight_string_spellcheck = 0
 let g:go_highlight_format_strings = 0
+
 
 
