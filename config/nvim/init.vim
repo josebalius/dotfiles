@@ -49,16 +49,26 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " treesitter
 Plug 'nvim-treesitter/playground'                           " treesitter playground
 
 " Themes
-Plug 'josebalius/darcula-dark.nvim' " darcula theme
-Plug 'tomasiser/vim-code-dark'      " code dark theme
-Plug 'robertmeta/nofrils'           " no frills theme
+Plug 'josebalius/darcula-dark.nvim'      " darcula theme
+Plug 'tomasiser/vim-code-dark'           " code dark theme
+Plug 'robertmeta/nofrils'                " no frills theme
+Plug 'josebalius/vim-light-chromeclipse' " light chromeclipse theme
+Plug 'lunacookies/vim-colors-xcode'      " xcode theme
+Plug 'kkga/vim-envy'                     " envy theme
+" Plug 'morhetz/gruvbox'                   " gruvbox theme
+Plug 'tpope/vim-vividchalk'              " vividchalk theme 
+Plug 'fatih/molokai'                     " molokai theme
+Plug 'ellisonleao/gruvbox.nvim'
+Plug 'Verf/deepwhite.nvim'
+Plug 'yazeed1s/minimal.nvim'
+Plug 'cocopon/iceberg.vim'
+
 
 call plug#end()
 " end Plug
 
 " Theme
 colorscheme darcula-dark
-hi VertSplit guifg=#3f3f3f guibg=#2B2B2B
 
 " Indentation
 filetype plugin indent on " ensure we can configure filetype indent settings
@@ -126,7 +136,7 @@ require 'nvim-treesitter.configs'.setup {
 
   highlight = {
     -- `false` will disable the whole extension
-    enable = true,
+    enable = false,
     additional_vim_regex_highlighting = false,
 
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
@@ -139,6 +149,12 @@ require 'nvim-treesitter.configs'.setup {
 vim.keymap.set('n', '<leader>c', require('osc52').copy_operator, {expr = true})
 vim.keymap.set('n', '<leader>cc', '<leader>c_', {remap = true})
 vim.keymap.set('v', '<leader>c', require('osc52').copy_visual)
+
+require('deepwhite').setup({
+    -- If you have some anti-blue light setting (f.lux, light bulb, or low blue light mode monitor),
+    -- turn it on, this will set the background color to a cooler color to prevent the background from being too warm.
+    low_blue_light = true
+})
 EOF
 
 function! SynGroup()
@@ -164,13 +180,30 @@ function! Light()
   " hi Type guifg=#215FB5
 endfun
 
+function! Xcode()
+colorscheme xcodelight 
+let $BAT_THEME="GitHub"
+endfun
+
+function! Eclipse()
+colorscheme light-chromeclipse
+hi Normal guibg=#F7F8F8 guifg=#000000
+hi Keyword gui=bold
+let $BAT_THEME="GitHub"
+endfun
+
 " Go plugin settings
 let g:go_fmt_command = "goimports"
 let g:go_doc_popup_window = 1
 let g:go_code_completion_enabled = 1
-let g:go_highlight_extra_types = 0
+let g:go_highlight_extra_types = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_function_parameters = 0
+let g:go_highlight_fields = 0
+let g:go_highlight_types = 0
 let g:go_highlight_string_spellcheck = 0
 let g:go_highlight_format_strings = 0
 
+call Xcode()
 
 
