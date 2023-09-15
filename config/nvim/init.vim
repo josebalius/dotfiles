@@ -47,6 +47,8 @@ Plug 'junegunn/fzf.vim'
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " treesitter
 Plug 'nvim-treesitter/playground'                           " treesitter playground
+Plug 'lukas-reineke/indent-blankline.nvim'
+
 
 " Themes
 Plug 'josebalius/darcula-dark.nvim'      " darcula theme
@@ -62,6 +64,8 @@ Plug 'ellisonleao/gruvbox.nvim'
 Plug 'Verf/deepwhite.nvim'
 Plug 'yazeed1s/minimal.nvim'
 Plug 'cocopon/iceberg.vim'
+Plug 'projekt0n/github-nvim-theme'
+
 
 
 call plug#end()
@@ -191,6 +195,19 @@ hi Normal guibg=#F7F8F8 guifg=#000000
 hi Keyword gui=bold
 let $BAT_THEME="GitHub"
 endfun
+
+function! GruvboxLight()
+        set background=light
+        colorscheme gruvbox
+        let $BAT_THEME="GitHub"
+endfun
+
+function! GruvboxDark()
+        set background=dark
+        colorscheme gruvbox
+        let $BAT_THEME="Gruvbox"
+endfun
+
 
 " Go plugin settings
 let g:go_fmt_command = "goimports"
