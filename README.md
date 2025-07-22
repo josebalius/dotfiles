@@ -32,3 +32,4 @@ This repo uses the wonderful [Vim Plug](https://github.com/junegunn/vim-plug) to
 
 Jose Balius
 Jose Garcia
+josebalius
