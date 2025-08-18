@@ -19,6 +19,7 @@ syntax on                        " enable syntax
 syntax enable 
 set t_Co=256                     " enable 256 colors
 set completeopt-=preview         " enable auto complete preview window
+set termguicolors
 
 " backup locations
 set backupdir=/tmp//
@@ -65,14 +66,27 @@ Plug 'Verf/deepwhite.nvim'
 Plug 'yazeed1s/minimal.nvim'
 Plug 'cocopon/iceberg.vim'
 Plug 'projekt0n/github-nvim-theme'
+Plug 'chriskempson/base16-vim'
+Plug 'Skardyy/makurai-nvim'
 
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'pmizio/typescript-tools.nvim'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+
+Plug 'jose-elias-alvarez/null-ls.nvim'
+Plug 'MunifTanjim/prettier.nvim'
+
+Plug 'mason-org/mason.nvim'
+Plug 'stevearc/conform.nvim'
 
 
 call plug#end()
 " end Plug
 
 " Theme
-colorscheme darcula-dark
+colorscheme base16-bright
 
 " Indentation
 filetype plugin indent on " ensure we can configure filetype indent settings
@@ -125,11 +139,18 @@ noremap <Leader>ref :GoReferrers<CR>
 nnoremap <silent> <2-LeftMouse> :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hls<cr>
 nnoremap <Leader>* :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hls<cr>
 
+" Make popup + selection contrast clearly (works in 256-color and truecolor)
+hi Pmenu     ctermbg=237 ctermfg=252 guibg=#2a2a2a guifg=#d0d0d0
+hi PmenuSel  ctermbg=111 ctermfg=16  guibg=#87afff guifg=#000000 gui=bold
+hi PmenuSbar ctermbg=238 guibg=#444444
+hi PmenuThumb ctermbg=245 guibg=#8a8a8a
+
 " Tree sitter
 lua << EOF
 require 'nvim-treesitter.configs'.setup {
   -- One of "all", "maintained" (parsers with maintainers), or a list of languages
-  ensure_installed = { "ruby", "go" },
+  ensure_installed = { "typescript", "tsx" },
+  ignore_install = { "go", "ruby" },
 
   -- Install languages synchronously (only applied to `ensure_installed`)
   sync_install = true,
@@ -140,7 +161,7 @@ require 'nvim-treesitter.configs'.setup {
 
   highlight = {
     -- `false` will disable the whole extension
-    enable = false,
+    enable = {"typescript", "tsx"},
     additional_vim_regex_highlighting = false,
 
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
@@ -148,6 +169,13 @@ require 'nvim-treesitter.configs'.setup {
     -- Using this option may slow down your editor, and you may see some duplicate highlights.
     -- Instead of true it can also be a list of languages
   },
+}
+
+require('osc52').setup {
+  max_length = 0,           -- Maximum length of selection (0 for no limit)
+  silent = false,           -- Disable message on successful copy
+  trim = false,             -- Trim surrounding whitespaces before copy
+  tmux_passthrough = true, -- Use tmux passthrough (requires tmux: set -g allow-passthrough on)
 }
 
 vim.keymap.set('n', '<leader>c', require('osc52').copy_operator, {expr = true})
@@ -159,6 +187,175 @@ require('deepwhite').setup({
     -- turn it on, this will set the background color to a cooler color to prevent the background from being too warm.
     low_blue_light = true
 })
+
+require("mason").setup()
+
+local lspconfig = require('lspconfig')
+lspconfig.gopls.setup({
+  on_attach = function(client, bufnr)
+    -- Example key mappings for LSP-related commands:
+    local opts = { buffer = bufnr, noremap = true, silent = true }
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+        vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { noremap = true, silent = true })
+        vim.keymap.set("n", "<leader>e", function()
+          vim.diagnostic.open_float(nil, { scope = "line" })
+        end, { noremap = true, silent = true })
+    -- You can add more keybindings as desired
+  end,
+  settings = {
+    gopls = {
+      analyses = {
+        unusedparams = true,
+        shadow = true,
+      },
+      staticcheck = true,  -- Enable additional analyses with staticcheck
+    },
+  },
+  flags = {
+    debounce_text_changes = 150,
+  },
+})
+
+local ts_tools = require('typescript-tools')
+
+-- Setup TypeScript server with additional settings
+ts_tools.setup({
+  on_attach = function(client, bufnr)
+    -- Example keybindings:
+    local opts = { buffer = bufnr, remap = false }
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, { noremap = true, silent = true })
+    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { noremap = true, silent = true })
+    vim.keymap.set("n", "<leader>e", function()
+      vim.diagnostic.open_float(nil, { scope = "line" })
+    end, { noremap = true, silent = true })
+    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { noremap = true, silent = true })
+
+    -- Other buffer-local LSP setup if needed
+  end,
+
+  settings = {
+    -- These go directly under `settings` instead of under `typescript`
+    tsserver_file_preferences = {
+      includeInlayParameterNameHints = "all",
+      includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+      includeInlayFunctionParameterTypeHints = true,
+      includeInlayVariableTypeHints = true,
+      includeInlayPropertyDeclarationTypeHints = true,
+      includeInlayFunctionLikeReturnTypeHints = true,
+      includeInlayEnumMemberValueHints = true,
+    },
+  },
+})
+
+require("conform").setup({
+  formatters_by_ft = {
+    typescript = { "prettierd", stop_after_first = true },
+  },
+  format_on_save = {
+    -- These options will be passed to conform.format()
+    timeout_ms = 500,
+    lsp_format = "fallback",
+  },
+})
+
+vim.keymap.set('n', '<Ctrl-LeftMouse>', '<cmd>lua vim.lsp.buf.definition()<CR>')
+
+-- Completion setup
+vim.opt.completeopt = { "menuone", "noselect" }
+
+local patterns = { "typescript", "typescriptreact", "tsx", "javascript", "javascriptreact", "ruby", "go" }
+
+-- tiny helpers
+local CTRL_Y       = vim.api.nvim_replace_termcodes("<C-y>", true, false, true)
+local CTRL_E_CR    = vim.api.nvim_replace_termcodes("<C-e><CR>", true, false, true)
+local CTRL_X_CTRL_O= vim.api.nvim_replace_termcodes("<C-x><C-o>", true, false, true)
+
+-- cheap syntax check (avoid comments/strings)
+local function in_comment_or_string()
+  local l, c = vim.fn.line("."), math.max(vim.fn.col(".") - 1, 1)
+  local id = vim.fn.synID(l, c, 1)
+  local name = vim.fn.synIDattr(id, "name")
+  return name:find("Comment") or name:find("String")
+end
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = patterns,
+  callback = function(args)
+    local bufnr = args.buf
+
+    -- ENTER: confirm selection if popup visible; else newline (unchanged)
+    vim.keymap.set("i", "<CR>", function()
+      if vim.fn.pumvisible() == 1 then
+        local ci = vim.fn.complete_info({ "selected" })
+        if ci.selected ~= -1 then
+          return CTRL_Y
+        else
+          return CTRL_E_CR
+        end
+      end
+      return "\r"
+    end, { buffer = bufnr, expr = true, silent = true })
+
+    -- DOT: insert '.' and (debounced) trigger omni only in sane contexts
+    local DOT_DEBOUNCE_MS = 160   -- tune to taste
+    local FEED_DELAY_MS   = 40
+
+    vim.keymap.set("i", ".", function()
+      -- always insert the dot
+      local out = "."
+
+      -- cheap prechecks
+      if vim.fn.pumvisible() == 1 then return out end
+      if in_comment_or_string() then return out end
+
+      local col = vim.fn.col(".")
+      if col <= 1 then return out end
+      local prev = vim.fn.getline("."):sub(col - 1, col - 1)
+      -- trigger only after identifier/closing token
+      if not prev:match("[%w_)%]]") then return out end
+
+      -- debounce per buffer
+      local now = vim.loop.hrtime() / 1e6
+      local last = vim.b.__dot_omni_last or 0
+      if (now - last) < DOT_DEBOUNCE_MS then return out end
+      vim.b.__dot_omni_last = now
+
+      -- delay the actual completion so typing stays snappy
+      vim.defer_fn(function()
+        if not vim.api.nvim_buf_is_loaded(bufnr) then return end
+        if vim.fn.mode() ~= "i" then return end
+        if vim.fn.pumvisible() == 1 then return end
+        -- make sure omnifunc exists (LSP usually sets it)
+        if vim.bo[bufnr].omnifunc == "" then return end
+        vim.api.nvim_feedkeys(CTRL_X_CTRL_O, "i", false)
+      end, FEED_DELAY_MS)
+
+      return out
+    end, { buffer = bufnr, expr = true, silent = true })
+  end,
+})
+
+-- Put this somewhere after your options/plugins load
+vim.keymap.set("i", "<Down>", function()
+  return vim.fn.pumvisible() == 1 and "<C-n>" or "<Down>"
+end, { expr = true, silent = true })
+
+vim.keymap.set("i", "<Up>", function()
+  return vim.fn.pumvisible() == 1 and "<C-p>" or "<Up>"
+end, { expr = true, silent = true })
+
+-- (Optional) Tab/Shift-Tab also cycle the menu
+vim.keymap.set("i", "<Tab>", function()
+  return vim.fn.pumvisible() == 1 and "<C-n>" or "<Tab>"
+end, { expr = true, silent = true })
+vim.keymap.set("i", "<S-Tab>", function()
+  return vim.fn.pumvisible() == 1 and "<C-p>" or "<S-Tab>"
+end, { expr = true, silent = true })
+
 EOF
 
 function! SynGroup()
@@ -220,7 +417,4 @@ let g:go_highlight_fields = 0
 let g:go_highlight_types = 0
 let g:go_highlight_string_spellcheck = 0
 let g:go_highlight_format_strings = 0
-
-call Xcode()
-
 
