@@ -139,6 +139,12 @@ noremap <Leader>ref :GoReferrers<CR>
 nnoremap <silent> <2-LeftMouse> :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hls<cr>
 nnoremap <Leader>* :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hls<cr>
 
+" Make popup + selection contrast clearly (works in 256-color and truecolor)
+hi Pmenu     ctermbg=237 ctermfg=252 guibg=#2a2a2a guifg=#d0d0d0
+hi PmenuSel  ctermbg=111 ctermfg=16  guibg=#87afff guifg=#000000 gui=bold
+hi PmenuSbar ctermbg=238 guibg=#444444
+hi PmenuThumb ctermbg=245 guibg=#8a8a8a
+
 " Tree sitter
 lua << EOF
 require 'nvim-treesitter.configs'.setup {
@@ -332,6 +338,23 @@ vim.api.nvim_create_autocmd("FileType", {
     end, { buffer = bufnr, expr = true, silent = true })
   end,
 })
+
+-- Put this somewhere after your options/plugins load
+vim.keymap.set("i", "<Down>", function()
+  return vim.fn.pumvisible() == 1 and "<C-n>" or "<Down>"
+end, { expr = true, silent = true })
+
+vim.keymap.set("i", "<Up>", function()
+  return vim.fn.pumvisible() == 1 and "<C-p>" or "<Up>"
+end, { expr = true, silent = true })
+
+-- (Optional) Tab/Shift-Tab also cycle the menu
+vim.keymap.set("i", "<Tab>", function()
+  return vim.fn.pumvisible() == 1 and "<C-n>" or "<Tab>"
+end, { expr = true, silent = true })
+vim.keymap.set("i", "<S-Tab>", function()
+  return vim.fn.pumvisible() == 1 and "<C-p>" or "<S-Tab>"
+end, { expr = true, silent = true })
 
 EOF
 
