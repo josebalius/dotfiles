@@ -27,12 +27,15 @@ fi
 sudo modprobe fuse
 sudo groupadd fuse
 sudo usermod -a -G fuse "$(whoami)"
-# wget https://github.com/neovim/neovim/releases/download/v0.5.1/nvim.appimage
+#wget https://github.com/neovim/neovim/releases/download/v0.5.1/nvim.appimage
 #wget https://github.com/github/copilot.vim/releases/download/neovim-nightlies/appimage.zip
 #unzip appimage.zip
-curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-sudo chmod u+x nvim.appimage
-sudo mv nvim.appimage /usr/local/bin/nvim
+#curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-x86_64.appimage
+#sudo chmod u+x nvim.appimage
+sudo chmod u+x nvim-linux-x86_64.appimage
+#sudo mv nvim.appimage /usr/local/bin/nvim
+sudo mv nvim-linux-x86_64.appimage /usr/local/bin/nvim
 
 ln -s $(pwd)/tmux.conf $HOME/.tmux.conf
 ln -s $(pwd)/vimrc $HOME/.vimrc
