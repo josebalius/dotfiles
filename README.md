@@ -1,27 +1,24 @@
-# Codespaces Dotfiles Template
+# Jose Balius's Dotfiles
 
-Test
-This repo is a starting point for using custom dotfiles (terminal / editor configuration) with GitHub Codespaces
+Personal dotfiles configuration for terminal and editor setup, optimized for GitHub Codespaces and local development.
 
-## How to use this repo
+## How to use these dotfiles
 
-In order to use this template, 
+To use these dotfiles:
 
-1. [create a new repo from this template](https://github.com/cwndrws/codespaces-dotfiles-template/generate). Make it public and name it `dotfiles`.
-1. Edit the files that you want to customize in `tmux.conf`, `vimrc`, etc.
-1. Push your changes to your `dotfiles` repo
-1. Create a new codespace, and see your new dotfiles
+1. Fork this repository or clone it to your local machine
+1. Edit the configuration files (`tmux.conf`, `vimrc`, etc.) to match your preferences
+1. Run the install script: `./install.sh`
+1. For GitHub Codespaces, ensure this repo is set as your dotfiles repository in your GitHub settings
 1. 🍾
 
 ## What's in here?
 
-Just some blank configuration files for popular Text User Interface (TUI) apps that folks may want to use for development in codespaces and a script to put them in the right place.
-
-This supports the following tools:
+Personal configuration files for various development tools, including custom themes and optimized settings for:
 
 * Tmux
-* Screen
-* Vim
+* Screen  
+* Vim/Neovim
 * Emacs
 
 ## Vim Plugins
@@ -29,3 +26,7 @@ This supports the following tools:
 This repo uses the wonderful [Vim Plug](https://github.com/junegunn/vim-plug) tool to manage vim plugins. If you'd like to add plugins, simply add them between the opening and closing plug statements in the `vimrc` file.
 
 ## My dotfiles
+
+**Author:** Jose Balius
+
+These are my personal configuration files for various development tools and editors. The setup includes custom themes, key bindings, and plugins that I've found useful for daily development work.
