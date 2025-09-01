@@ -1,127 +1,150 @@
-set nocompatible                 " be iMproved, required
-filetype off                     " required
+" =========================
+" Neovim Config (Reconciled)
+" =========================
 
-let mapleader=','                " leader key
-set linespace=5                  " space between lines
-set number                       " show line numbers
-set relativenumber               " relative line numbers
-set mouse+=a                     " enable mouse support on all modes
-set autoread                     " check if file is modified outside of nvim 
-set cursorline                   " line highlighting cursor position
-set nofoldenable                 " don't fold blocks
-set nolist                       " don't render special chars
-set lazyredraw                   " be lazy drawing so we are faster
-set ttyfast                      " running in fast terminal, so be fast
-set clipboard=unnamed            " unnamed clipboard so we can take over it
-set colorcolumn=120              " 120 line lenghts is what we like
-set timeoutlen=1000              " timeout for detecting commands
-syntax on                        " enable syntax
-syntax enable 
-set t_Co=256                     " enable 256 colors
-set completeopt-=preview         " enable auto complete preview window
+" ---------- Core ----------
+set nocompatible
+filetype off
+let mapleader=','
+
+" ---------- UI ----------
+set number
+set relativenumber
+set linespace=5
+set mouse+=a
+set cursorline
+set colorcolumn=120
 set termguicolors
+syntax enable
 
-" backup locations
+" ---------- Editing / UX ----------
+set nolist
+set completeopt-=preview
+set timeoutlen=1000
+set updatetime=100
+set clipboard=unnamed
+
+" ---------- Performance / Files ----------
+set autoread
+set nofoldenable
+set lazyredraw
+set ttyfast
+set noswapfile
+set nobackup
+set nowritebackup
 set backupdir=/tmp//
 set directory=/tmp//
 set undodir=/tmp//
 
-
-" setup Plug
+" ---------- Plugins ----------
 call plug#begin("~/.config/nvim/bundle")
 
-Plug 'tpope/vim-fugitive'          " git utils
-Plug 'tpope/vim-rhubarb'           " github utils
-Plug 'tpope/vim-eunuch'            " UNIX shell commands, :Mkdir, :Move, etc
-Plug 'tpope/vim-commentary'        " Comment stuff out
-Plug 'tpope/vim-sensible'          " tpope knows more vim than me, sensible defaults
-Plug 'fatih/vim-go'                " Go plugin
-Plug 'preservim/nerdtree'          " File browser
-Plug 'airblade/vim-gitgutter'      " Git gutter
-Plug 'github/copilot.vim'          " Copilot
-Plug 'ojroques/nvim-osc52'         " Copy to clipboard
+" Essentials
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-commentary'
+Plug 'ojroques/nvim-osc52'
 
-Plug 'christoomey/vim-tmux-navigator' " tmux navigation
+" Git
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+Plug 'airblade/vim-gitgutter'
 
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " fuzzy finder
+" Files / Nav
+Plug 'preservim/nerdtree'
+Plug 'christoomey/vim-tmux-navigator'
+
+" FZF
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " treesitter
-Plug 'nvim-treesitter/playground'                           " treesitter playground
+" Treesitter / Indent
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/playground'
 Plug 'lukas-reineke/indent-blankline.nvim'
 
+" LSP / Completion
+Plug 'neovim/nvim-lspconfig'
+Plug 'pmizio/typescript-tools.nvim'         " from remote
+Plug 'Saghen/blink.cmp'                     " from local (keep)
+Plug 'mason-org/mason.nvim'                 " from remote
+Plug 'nvim-lua/plenary.nvim'
+Plug 'stevearc/conform.nvim'                " from remote
 
-" Themes
-Plug 'josebalius/darcula-dark.nvim'      " darcula theme
-Plug 'tomasiser/vim-code-dark'           " code dark theme
-Plug 'robertmeta/nofrils'                " no frills theme
-Plug 'josebalius/vim-light-chromeclipse' " light chromeclipse theme
-Plug 'lunacookies/vim-colors-xcode'      " xcode theme
-Plug 'kkga/vim-envy'                     " envy theme
-" Plug 'morhetz/gruvbox'                   " gruvbox theme
-Plug 'tpope/vim-vividchalk'              " vividchalk theme 
-Plug 'fatih/molokai'                     " molokai theme
+" Languages
+Plug 'fatih/vim-go'
+Plug 'mrcjkb/rustaceanvim'
+
+" Themes (full set kept)
+Plug 'josebalius/darcula-dark.nvim'
+Plug 'tomasiser/vim-code-dark'
+Plug 'robertmeta/nofrils'
+Plug 'josebalius/vim-light-chromeclipse'
+Plug 'lunacookies/vim-colors-xcode'
+Plug 'kkga/vim-envy'
+Plug 'tpope/vim-vividchalk'
+Plug 'fatih/molokai'
 Plug 'ellisonleao/gruvbox.nvim'
 Plug 'Verf/deepwhite.nvim'
 Plug 'yazeed1s/minimal.nvim'
 Plug 'cocopon/iceberg.vim'
 Plug 'projekt0n/github-nvim-theme'
 Plug 'chriskempson/base16-vim'
+Plug 'andreasvc/vim-256noir'
+Plug 'fcpg/vim-farout'
+Plug 'zenbones-theme/zenbones.nvim'
+Plug 'jackplus-xyz/binary.nvim'
+Plug 'rktjmp/lush.nvim'
+Plug 'metalelf0/jellybeans-nvim'
+Plug 'rebelot/kanagawa.nvim'
+Plug 'AlexvZyl/nordic.nvim'
+Plug 'nyoom-engineering/oxocarbon.nvim'
+Plug 'felipeagc/fleet-theme-nvim'
+Plug 'scottmckendry/cyberdream.nvim'
 Plug 'Skardyy/makurai-nvim'
 
-Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'pmizio/typescript-tools.nvim'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-nvim-lsp'
-
-Plug 'jose-elias-alvarez/null-ls.nvim'
-Plug 'MunifTanjim/prettier.nvim'
-
-Plug 'mason-org/mason.nvim'
-Plug 'stevearc/conform.nvim'
-
+" Extras
+Plug 'github/copilot.vim'
 
 call plug#end()
-" end Plug
 
-" Theme
-colorscheme base16-bright
+" ---------- Colors ----------
+let g:codedark_modern = 1
+set background=light
+colorscheme gruvbox    " local default; you can switch with the helper funcs below
 
-" Indentation
-filetype plugin indent on " ensure we can configure filetype indent settings
+" ---------- Filetype / Indent ----------
+filetype plugin indent on
 
-set expandtab
-autocmd Filetype typescript setlocal tabstop=2
-autocmd Filetype typescript setlocal shiftwidth=2
-autocmd Filetype css setlocal tabstop=2
-autocmd Filetype css setlocal shiftwidth=2
-autocmd Filetype javascript setlocal tabstop=2
-autocmd Filetype javascript setlocal shiftwidth=2
-autocmd Filetype go setlocal tabstop=4
-autocmd Filetype go setlocal shiftwidth=4
-autocmd Filetype scss setlocal tabstop=2
-autocmd Filetype scss setlocal shiftwidth=2
-autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
-autocmd BufWritePre *.rb :%s/\s\+$//e
-autocmd FileType javascript setl indentexpr=
+augroup INDENT_SETTINGS
+  autocmd!
+  autocmd Filetype typescript setlocal tabstop=4 shiftwidth=4   " local preference
+  autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2
+  autocmd Filetype css        setlocal tabstop=2 shiftwidth=2
+  autocmd Filetype scss       setlocal tabstop=2 shiftwidth=2
+  autocmd Filetype go         setlocal tabstop=4 shiftwidth=4
+  autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
+  autocmd BufWritePre *.rb :%s/\s\+$//e
+  autocmd FileType javascript setlocal indentexpr=
+augroup END
 
-" Key mappings
-map ; :Files<CR>
-noremap gg :GGrep<CR>
+" ---------- FZF Commands ----------
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
 command! -bang -nargs=* GGrep
-  \ call fzf#vim#grep(
-  \   'git grep --line-number -- '.shellescape(<q-args>),
-  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
+      \ call fzf#vim#grep(
+      \   'git grep --line-number -- '.shellescape(<q-args>),
+      \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}),
+      \   <bang>0)
 
-noremap <C-c> :<C-u>'<,'>Commentary<CR>
+" ---------- Keymaps ----------
+map ; :Files<CR>
+noremap gg :GGrep<CR>
 noremap vv :<C-u>vsplit<CR>
 noremap tt :<C-u>split<CR>
 noremap fi :BLines<CR>
 noremap <Leader>t :<C-u>tabnew<CR>
-noremap <Tab> :<C-u>tabnext<CR>
-noremap <S-Tab> :<C-u>tabprevious<CR>
+noremap <Tab>      :<C-u>tabnext<CR>
+noremap <S-Tab>    :<C-u>tabprevious<CR>
 noremap <Leader>q :q<CR>
 noremap <Leader>w :w<CR>
 noremap <C-H> <C-W><C-H>
@@ -129,116 +152,116 @@ noremap <C-J> <C-W><C-J>
 noremap <C-K> <C-W><C-K>
 noremap <C-L> <C-W><C-L>
 nnoremap <F3> :set hlsearch!<CR>
+noremap <C-c> :<C-u>'<,'>Commentary<CR>
 
-noremap gt :w <CR>:GoTest<CR>
-noremap gf :w <CR>:GoTestFunc<CR>
-noremap <Leader>b :w<CR>:GoBuild<CR>
-noremap <Leader>im :GoImplements<CR>
+" Mouse word search
+nnoremap <silent> <2-LeftMouse> :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<CR>:set hls<CR>
+nnoremap <Leader>*              :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<CR>:set hls<CR>
+
+" Go helpers (vim-go)
+noremap gt :w<CR>:GoTest<CR>
+noremap gf :w<CR>:GoTestFunc<CR>
+noremap <Leader>b   :w<CR>:GoBuild<CR>
+noremap <Leader>im  :GoImplements<CR>
 noremap <Leader>ref :GoReferrers<CR>
 
-nnoremap <silent> <2-LeftMouse> :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hls<cr>
-nnoremap <Leader>* :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hls<cr>
+" ---------- Helpers ----------
+function! SynGroup()
+  let l:s = synID(line('.'), col('.'), 1)
+  echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
+endfunction
 
-" Make popup + selection contrast clearly (works in 256-color and truecolor)
-hi Pmenu     ctermbg=237 ctermfg=252 guibg=#2a2a2a guifg=#d0d0d0
-hi PmenuSel  ctermbg=111 ctermfg=16  guibg=#87afff guifg=#000000 gui=bold
-hi PmenuSbar ctermbg=238 guibg=#444444
-hi PmenuThumb ctermbg=245 guibg=#8a8a8a
+" ---------- Smart Ctrl-click (LSP goto def; fallback tags) ----------
+silent! unmap <C-LeftMouse>
+nnoremap <silent> <C-LeftMouse> <LeftMouse><Cmd>lua _G.ctrl_click_goto_def()<CR>
 
-" Tree sitter
+" =================
+" Lua Configuration
+" =================
 lua << EOF
-require 'nvim-treesitter.configs'.setup {
-  -- One of "all", "maintained" (parsers with maintainers), or a list of languages
-  ensure_installed = { "typescript", "tsx" },
-  ignore_install = { "go", "ruby" },
-
-  -- Install languages synchronously (only applied to `ensure_installed`)
+-- Treesitter
+require('nvim-treesitter.configs').setup({
+  ensure_installed = { "rust", "go", "typescript", "tsx" },
   sync_install = true,
-
-  -- Automatically install missing parsers when entering buffer
-  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-  auto_install = true,
-
+  auto_install  = true,
   highlight = {
-    -- `false` will disable the whole extension
-    enable = {"typescript", "tsx"},
+    enable = false,                       -- keep your local setting
     additional_vim_regex_highlighting = false,
-
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
   },
-}
+})
 
-require('osc52').setup {
-  max_length = 0,           -- Maximum length of selection (0 for no limit)
-  silent = false,           -- Disable message on successful copy
-  trim = false,             -- Trim surrounding whitespaces before copy
-  tmux_passthrough = true, -- Use tmux passthrough (requires tmux: set -g allow-passthrough on)
-}
-
+-- OSC52 (remote)
+require('osc52').setup({
+  max_length = 0,
+  silent = false,
+  trim = false,
+  tmux_passthrough = true,
+})
 vim.keymap.set('n', '<leader>c', require('osc52').copy_operator, {expr = true})
 vim.keymap.set('n', '<leader>cc', '<leader>c_', {remap = true})
 vim.keymap.set('v', '<leader>c', require('osc52').copy_visual)
 
-require('deepwhite').setup({
-    -- If you have some anti-blue light setting (f.lux, light bulb, or low blue light mode monitor),
-    -- turn it on, this will set the background color to a cooler color to prevent the background from being too warm.
-    low_blue_light = true
-})
-
+-- Mason (remote)
 require("mason").setup()
 
+-- LSP common helpers
 local lspconfig = require('lspconfig')
+
+-- Go (local kept)
 lspconfig.gopls.setup({
   on_attach = function(client, bufnr)
-    -- Example key mappings for LSP-related commands:
     local opts = { buffer = bufnr, noremap = true, silent = true }
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
     vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-        vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { noremap = true, silent = true })
-        vim.keymap.set("n", "<leader>e", function()
-          vim.diagnostic.open_float(nil, { scope = "line" })
-        end, { noremap = true, silent = true })
-    -- You can add more keybindings as desired
+    vim.keymap.set("n", "K",  vim.lsp.buf.hover, opts)
+    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+    vim.keymap.set("n", "<leader>e", function() vim.diagnostic.open_float(nil, { scope = "line" }) end, opts)
   end,
   settings = {
-    gopls = {
-      analyses = {
-        unusedparams = true,
-        shadow = true,
-      },
-      staticcheck = true,  -- Enable additional analyses with staticcheck
-    },
+    gopls = { analyses = { unusedparams = true, shadow = true }, staticcheck = true },
   },
-  flags = {
-    debounce_text_changes = 150,
-  },
+  flags = { debounce_text_changes = 150 },
 })
 
-local ts_tools = require('typescript-tools')
+-- Rust (local kept)
+lspconfig.rust_analyzer.setup({
+  settings = {
+    ["rust-analyzer"] = {
+      diagnostics = { enable = true },
+      cargo = { allFeatures = true, loadOutDirsFromCheck = true, runBuildScripts = true },
+      procMacro = { enable = true, ignored = { leptos_macro = { "component", "server" } } },
+      imports = { granularity = { group = "module" }, prefix = "self" },
+      completion = { addCallArgumentSnippets = false, addCallParenthesis = false, autoimport = { enable = true } },
+    },
+  },
+  on_attach = function(client, bufnr)
+    if client.server_capabilities.codeActionProvider then
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        buffer = bufnr,
+        callback = function()
+          vim.lsp.buf.execute_command({
+            command = "rust-analyzer.organizeImports",
+            arguments = { vim.uri_from_bufnr(bufnr) },
+          })
+        end,
+      })
+    end
+  end,
+})
 
--- Setup TypeScript server with additional settings
+-- TypeScript via typescript-tools (from remote; preferred over typescript.nvim)
+local ts_tools = require('typescript-tools')
 ts_tools.setup({
   on_attach = function(client, bufnr)
-    -- Example keybindings:
-    local opts = { buffer = bufnr, remap = false }
+    local opts = { buffer = bufnr, remap = false, noremap = true, silent = true }
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-    vim.keymap.set("n", "gr", vim.lsp.buf.references, { noremap = true, silent = true })
-    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { noremap = true, silent = true })
-    vim.keymap.set("n", "<leader>e", function()
-      vim.diagnostic.open_float(nil, { scope = "line" })
-    end, { noremap = true, silent = true })
-    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { noremap = true, silent = true })
-
-    -- Other buffer-local LSP setup if needed
+    vim.keymap.set("n", "K",  vim.lsp.buf.hover, opts)
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+    vim.keymap.set("n", "<leader>e", function() vim.diagnostic.open_float(nil, { scope = "line" }) end, opts)
+    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
   end,
-
   settings = {
-    -- These go directly under `settings` instead of under `typescript`
     tsserver_file_preferences = {
       includeInlayParameterNameHints = "all",
       includeInlayParameterNameHintsWhenArgumentMatchesName = false,
@@ -251,170 +274,51 @@ ts_tools.setup({
   },
 })
 
+-- Format TS/TSX on save (Conform + prettierd, from remote)
 require("conform").setup({
   formatters_by_ft = {
     typescript = { "prettierd", stop_after_first = true },
+    tsx        = { "prettierd", stop_after_first = true },
+    typescriptreact = { "prettierd", stop_after_first = true },
+    javascript = { "prettierd", stop_after_first = true },
+    javascriptreact = { "prettierd", stop_after_first = true },
   },
-  format_on_save = {
-    -- These options will be passed to conform.format()
-    timeout_ms = 500,
-    lsp_format = "fallback",
-  },
+  format_on_save = { timeout_ms = 500, lsp_format = "fallback" },
 })
 
-vim.keymap.set('n', '<Ctrl-LeftMouse>', '<cmd>lua vim.lsp.buf.definition()<CR>')
-
--- Completion setup
-vim.opt.completeopt = { "menuone", "noselect" }
-
-local patterns = { "typescript", "typescriptreact", "tsx", "javascript", "javascriptreact", "ruby", "go" }
-
--- tiny helpers
-local CTRL_Y       = vim.api.nvim_replace_termcodes("<C-y>", true, false, true)
-local CTRL_E_CR    = vim.api.nvim_replace_termcodes("<C-e><CR>", true, false, true)
-local CTRL_X_CTRL_O= vim.api.nvim_replace_termcodes("<C-x><C-o>", true, false, true)
-
--- cheap syntax check (avoid comments/strings)
-local function in_comment_or_string()
-  local l, c = vim.fn.line("."), math.max(vim.fn.col(".") - 1, 1)
-  local id = vim.fn.synID(l, c, 1)
-  local name = vim.fn.synIDattr(id, "name")
-  return name:find("Comment") or name:find("String")
+-- Ctrl-click smart goto def with fallback to tags
+_G.ctrl_click_goto_def = function()
+  local bufnr = vim.api.nvim_get_current_buf()
+  local clients = (vim.lsp.buf_get_clients and vim.lsp.buf_get_clients(bufnr))
+               or (vim.lsp.get_clients and vim.lsp.get_clients({ bufnr = bufnr }))
+               or {}
+  for _, c in pairs(clients) do
+    local caps = c.server_capabilities or c.resolved_capabilities
+    if caps and (caps.definitionProvider or caps.goto_definition) then
+      vim.lsp.buf.definition()
+      return
+    end
+  end
+  vim.cmd('normal! <C-]>')
 end
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = patterns,
-  callback = function(args)
-    local bufnr = args.buf
-
-    -- ENTER: confirm selection if popup visible; else newline (unchanged)
-    vim.keymap.set("i", "<CR>", function()
-      if vim.fn.pumvisible() == 1 then
-        local ci = vim.fn.complete_info({ "selected" })
-        if ci.selected ~= -1 then
-          return CTRL_Y
-        else
-          return CTRL_E_CR
-        end
-      end
-      return "\r"
-    end, { buffer = bufnr, expr = true, silent = true })
-
-    -- DOT: insert '.' and (debounced) trigger omni only in sane contexts
-    local DOT_DEBOUNCE_MS = 160   -- tune to taste
-    local FEED_DELAY_MS   = 40
-
-    vim.keymap.set("i", ".", function()
-      -- always insert the dot
-      local out = "."
-
-      -- cheap prechecks
-      if vim.fn.pumvisible() == 1 then return out end
-      if in_comment_or_string() then return out end
-
-      local col = vim.fn.col(".")
-      if col <= 1 then return out end
-      local prev = vim.fn.getline("."):sub(col - 1, col - 1)
-      -- trigger only after identifier/closing token
-      if not prev:match("[%w_)%]]") then return out end
-
-      -- debounce per buffer
-      local now = vim.loop.hrtime() / 1e6
-      local last = vim.b.__dot_omni_last or 0
-      if (now - last) < DOT_DEBOUNCE_MS then return out end
-      vim.b.__dot_omni_last = now
-
-      -- delay the actual completion so typing stays snappy
-      vim.defer_fn(function()
-        if not vim.api.nvim_buf_is_loaded(bufnr) then return end
-        if vim.fn.mode() ~= "i" then return end
-        if vim.fn.pumvisible() == 1 then return end
-        -- make sure omnifunc exists (LSP usually sets it)
-        if vim.bo[bufnr].omnifunc == "" then return end
-        vim.api.nvim_feedkeys(CTRL_X_CTRL_O, "i", false)
-      end, FEED_DELAY_MS)
-
-      return out
-    end, { buffer = bufnr, expr = true, silent = true })
-  end,
+-- Completion: blink.cmp (local)
+require("blink.cmp").setup({
+  fuzzy = { implementation = "lua" },
+  keymap = { preset = "enter" },
+  completion = { menu = { auto_show = true } },
 })
 
--- Put this somewhere after your options/plugins load
-vim.keymap.set("i", "<Down>", function()
-  return vim.fn.pumvisible() == 1 and "<C-n>" or "<Down>"
-end, { expr = true, silent = true })
+-- Extra: nice Insert-mode popup menu navigation
+vim.keymap.set("i", "<Down>", function() return vim.fn.pumvisible() == 1 and "<C-n>" or "<Down>" end, { expr = true, silent = true })
+vim.keymap.set("i", "<Up>",   function() return vim.fn.pumvisible() == 1 and "<C-p>" or "<Up>"   end, { expr = true, silent = true })
+vim.keymap.set("i", "<Tab>",      function() return vim.fn.pumvisible() == 1 and "<C-n>" or "<Tab>"    end, { expr = true, silent = true })
+vim.keymap.set("i", "<S-Tab>",    function() return vim.fn.pumvisible() == 1 and "<C-p>" or "<S-Tab>"  end, { expr = true, silent = true })
 
-vim.keymap.set("i", "<Up>", function()
-  return vim.fn.pumvisible() == 1 and "<C-p>" or "<Up>"
-end, { expr = true, silent = true })
-
--- (Optional) Tab/Shift-Tab also cycle the menu
-vim.keymap.set("i", "<Tab>", function()
-  return vim.fn.pumvisible() == 1 and "<C-n>" or "<Tab>"
-end, { expr = true, silent = true })
-vim.keymap.set("i", "<S-Tab>", function()
-  return vim.fn.pumvisible() == 1 and "<C-p>" or "<S-Tab>"
-end, { expr = true, silent = true })
-
+-- Format TS/TSX on save via LSP if conform didn't run (fallback handled above)
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = { "*.ts", "*.tsx", "*.js", "*.jsx" },
+  callback = function() vim.lsp.buf.format({ async = false }) end,
+})
 EOF
-
-function! SynGroup()
-    let l:s = synID(line('.'), col('.'), 1)
-    echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
-endfun
-
-function! Dark()
-  colorscheme nofrils-dark
-  hi Normal guibg=#000000 guifg=#FFFFFF
-endfun
-
-function! Light()
-  colorscheme nofrils-light
-  hi Normal guibg=#F7F8F8 guifg=#000000
-
-  hi Keyword gui=bold
-  hi Conditional gui=bold 
-  hi Statement gui=bold
-  hi Repeat gui=bold
-  hi Label gui=bold
-  " hi Constant guifg=#215FB5
-  " hi Type guifg=#215FB5
-endfun
-
-function! Xcode()
-colorscheme xcodelight 
-let $BAT_THEME="GitHub"
-endfun
-
-function! Eclipse()
-colorscheme light-chromeclipse
-hi Normal guibg=#F7F8F8 guifg=#000000
-hi Keyword gui=bold
-let $BAT_THEME="GitHub"
-endfun
-
-function! GruvboxLight()
-        set background=light
-        colorscheme gruvbox
-        let $BAT_THEME="GitHub"
-endfun
-
-function! GruvboxDark()
-        set background=dark
-        colorscheme gruvbox
-        let $BAT_THEME="Gruvbox"
-endfun
-
-
-" Go plugin settings
-let g:go_fmt_command = "goimports"
-let g:go_doc_popup_window = 1
-let g:go_code_completion_enabled = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_function_parameters = 0
-let g:go_highlight_fields = 0
-let g:go_highlight_types = 0
-let g:go_highlight_string_spellcheck = 0
-let g:go_highlight_format_strings = 0
 
