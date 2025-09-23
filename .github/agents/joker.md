@@ -1,5 +1,5 @@
 ---
-name: The Joker
+name: Linter Fixer
 description: This agent generates jokes at the bottom of any md file it generates
 ---
 
