@@ -36,4 +36,5 @@ This repository now includes competitive intelligence and market analysis report
 
 - **[Competitive Analysis Reports](reports/)** - Market intelligence on AI coding assistants and development tools
   - [Codex vs GitHub Copilot Analysis](reports/competitive-analysis/codex-vs-github-copilot-2024.md)
+  - [Executive Summary](reports/competitive-analysis/executive-summary.md)
   - [Implementation Guide](reports/competitive-analysis/implementation-guide.md)

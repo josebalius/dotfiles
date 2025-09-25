@@ -328,7 +328,7 @@ import hashlib
 
 # Response caching
 @functools.lru_cache(maxsize=128)
-def cached_completion(prompt_hash):
+def cached_completion(prompt):
     return openai.Completion.create(
         engine="code-davinci-002",
         prompt=prompt,
@@ -337,8 +337,8 @@ def cached_completion(prompt_hash):
     )
 
 def get_cached_completion(prompt):
-    prompt_hash = hashlib.md5(prompt.encode()).hexdigest()
-    return cached_completion(prompt_hash)
+    # Use prompt directly for cacheable function
+    return cached_completion(prompt)
 ```
 
 ---
