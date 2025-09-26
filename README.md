@@ -29,3 +29,12 @@ This supports the following tools:
 This repo uses the wonderful [Vim Plug](https://github.com/junegunn/vim-plug) tool to manage vim plugins. If you'd like to add plugins, simply add them between the opening and closing plug statements in the `vimrc` file.
 
 ## My dotfiles
+
+## Contributors
+
+- josebalius
+- williammartin
+
+---
+
+Why don't programmers like nature? It has too many bugs!
