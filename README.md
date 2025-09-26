@@ -1,16 +1,15 @@
-# Codespaces Dotfiles Template
+# josebalius's Dotfiles
 
-Test
-This repo is a starting point for using custom dotfiles (terminal / editor configuration) with GitHub Codespaces
+This repository contains josebalius's personal dotfiles (terminal / editor configuration) for use with GitHub Codespaces and local development environments.
 
-## How to use this repo
+## How to use josebalius's dotfiles
 
-In order to use this template, 
+To use these dotfiles in your own environment:
 
-1. [create a new repo from this template](https://github.com/cwndrws/codespaces-dotfiles-template/generate). Make it public and name it `dotfiles`.
-1. Edit the files that you want to customize in `tmux.conf`, `vimrc`, etc.
-1. Push your changes to your `dotfiles` repo
-1. Create a new codespace, and see your new dotfiles
+1. Clone this repository to your preferred location
+1. Run the `install.sh` script to set up symlinks and install dependencies
+1. Customize the configuration files as needed for your preferences
+1. Create a new codespace or terminal session to see the new dotfiles in action
 1. 🍾
 
 ## What's in here?
@@ -28,4 +27,10 @@ This supports the following tools:
 
 This repo uses the wonderful [Vim Plug](https://github.com/junegunn/vim-plug) tool to manage vim plugins. If you'd like to add plugins, simply add them between the opening and closing plug statements in the `vimrc` file.
 
-## My dotfiles
+## About josebalius's Setup
+
+These dotfiles reflect josebalius's personal development environment preferences, customized for productive coding sessions.
+
+---
+
+Why do programmers prefer dark mode? Because light attracts bugs!
