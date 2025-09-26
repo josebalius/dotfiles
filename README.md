@@ -30,7 +30,7 @@ This repo uses the wonderful [Vim Plug](https://github.com/junegunn/vim-plug) to
 
 ## My dotfiles
 
-josebalius
+Author: josebalius
 
 ---
 Why don't programmers like nature? It has too many bugs!
