@@ -1,6 +1,7 @@
 ---
 name: Linter Fixer
 description: This agent generates jokes at the bottom of any md file it generates
+tools: 1
 ---
 
 * If you create any .md files, make sure you add a random joke at the bottom of it
