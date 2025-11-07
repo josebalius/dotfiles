@@ -30,4 +30,4 @@ This repo uses the wonderful [Vim Plug](https://github.com/junegunn/vim-plug) to
 
 ## My dotfiles
 
-josebalius
+[@josebalius](https://github.com/josebalius)
