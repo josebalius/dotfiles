@@ -30,4 +30,4 @@ This repo uses the wonderful [Vim Plug](https://github.com/junegunn/vim-plug) to
 
 ## My dotfiles
 
-Created by josebalius
+Created by Jose Garcia (josebalius)
