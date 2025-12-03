@@ -13,6 +13,7 @@ set relativenumber
 set linespace=5
 set mouse+=a
 set cursorline
+set guicursor=n-v-c-i:block
 set colorcolumn=120
 set termguicolors
 syntax enable
@@ -22,7 +23,7 @@ set nolist
 set completeopt-=preview
 set timeoutlen=1000
 set updatetime=100
-set clipboard=unnamed
+set clipboard=unnamedplus
 
 " ---------- Performance / Files ----------
 set autoread
@@ -110,8 +111,8 @@ call plug#end()
 
 " ---------- Colors ----------
 let g:codedark_modern = 1
-set background=light
-colorscheme gruvbox    " local default; you can switch with the helper funcs below
+set background=dark
+colorscheme base16-bright" local default; you can switch with the helper funcs below
 
 " ---------- Filetype / Indent ----------
 filetype plugin indent on
@@ -133,8 +134,14 @@ command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'opti
 command! -bang -nargs=* GGrep
       \ call fzf#vim#grep(
       \   'git grep --line-number -- '.shellescape(<q-args>),
-      \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}),
+      \   1,
+      \   fzf#vim#with_preview({
+      \     'dir': systemlist('git rev-parse --show-toplevel')[0],
+      \     'options': ['--delimiter', ':', '--nth', '3..', '--exact'],
+      \   }),
       \   <bang>0)
+
+
 
 " ---------- Keymaps ----------
 map ; :Files<CR>
@@ -320,5 +327,74 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = { "*.ts", "*.tsx", "*.js", "*.jsx" },
   callback = function() vim.lsp.buf.format({ async = false }) end,
 })
+
+-- Yank GBrowse URL to local clipboard via OSC52
+vim.keymap.set('n', '<leader>gy', function()
+  -- Run GBrowse and capture what it prints (the URL)
+  local ok, out = pcall(vim.fn.execute, 'GBrowse')
+  if not ok then
+    vim.notify('GBrowse failed: ' .. out, vim.log.levels.ERROR)
+    return
+  end
+
+  -- Take the last non-empty line from the output as the URL
+  local url
+  for line in out:gmatch('[^\n]+') do
+    if line:match('%S') then
+      url = line
+    end
+  end
+
+  if not url or url == '' then
+    vim.notify('GBrowse produced no URL', vim.log.levels.WARN)
+    return
+  end
+
+  -- Send directly via OSC52 (no registers/clipboard provider involved)
+  require('osc52').copy(url)
+  vim.notify('osc52: copied GBrowse URL: ' .. url)
+end, { desc = 'Yank GBrowse URL to system clipboard (OSC52)' })
+
+local osc52 = require('osc52')
+
+-- Normal mode: copy GBrowse URL for current position
+vim.keymap.set('n', '<leader>gy', function()
+  -- Run :GBrowse and capture its output (the URL)
+  local ok, out = pcall(vim.fn.execute, 'GBrowse!')
+  if not ok then
+    vim.notify('GBrowse failed: ' .. tostring(out), vim.log.levels.ERROR)
+    return
+  end
+
+  local url = vim.trim(out or '')
+  if url == '' then
+    vim.notify('GBrowse did not return a URL', vim.log.levels.WARN)
+    return
+  end
+
+  osc52.copy(url)
+end, { desc = 'Yank GBrowse URL via OSC52' })
+
+-- Visual mode: copy GBrowse URL for selected range (line anchors)
+vim.keymap.set('v', '<leader>gy', function()
+  -- Use the visual range with GBrowse
+  local ok, out = pcall(vim.fn.execute, "'<,'>GBrowse!")
+  if not ok then
+    vim.notify('GBrowse (visual) failed: ' .. tostring(out), vim.log.levels.ERROR)
+    return
+  end
+
+  local url = vim.trim(out or '')
+  if url == '' then
+    vim.notify('GBrowse (visual) did not return a URL', vim.log.levels.WARN)
+    return
+  end
+
+  osc52.copy(url)
+end, { desc = 'Yank GBrowse URL for selection via OSC52' })
+
+
+
+
 EOF
 
