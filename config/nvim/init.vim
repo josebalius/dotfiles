@@ -328,32 +328,11 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   callback = function() vim.lsp.buf.format({ async = false }) end,
 })
 
--- Yank GBrowse URL to local clipboard via OSC52
-vim.keymap.set('n', '<leader>gy', function()
-  -- Run GBrowse and capture what it prints (the URL)
-  local ok, out = pcall(vim.fn.execute, 'GBrowse')
-  if not ok then
-    vim.notify('GBrowse failed: ' .. out, vim.log.levels.ERROR)
-    return
-  end
-
-  -- Take the last non-empty line from the output as the URL
-  local url
-  for line in out:gmatch('[^\n]+') do
-    if line:match('%S') then
-      url = line
-    end
-  end
-
-  if not url or url == '' then
-    vim.notify('GBrowse produced no URL', vim.log.levels.WARN)
-    return
-  end
-
-  -- Send directly via OSC52 (no registers/clipboard provider involved)
-  require('osc52').copy(url)
-  vim.notify('osc52: copied GBrowse URL: ' .. url)
-end, { desc = 'Yank GBrowse URL to system clipboard (OSC52)' })
+vim.keymap.set('n', '<leader>yf', function()
+  local path = vim.fn.expand('%:p')
+  require('osc52').copy(path)
+  vim.notify('osc52: copied path:\n' .. path, vim.log.levels.INFO)
+end, { desc = 'Yank file path to local clipboard via OSC52' })
 
 local osc52 = require('osc52')
 
