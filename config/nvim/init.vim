@@ -365,7 +365,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 vim.keymap.set('n', '<leader>yf', function()
   local path = vim.fn.expand('%:p')
   require('osc52').copy(path)
-  vim.notify('osc52: copied path:\n' .. path, vim.log.levels.INFO)
 end, { desc = 'Yank file path to local clipboard via OSC52' })
 
 
@@ -407,8 +406,16 @@ vim.keymap.set('v', '<leader>gy', function()
   osc52.copy(url)
 end, { desc = 'Yank GBrowse URL for selection via OSC52' })
 
-
+-- Also send every normal yank to OSC52 so it reaches your local clipboard
+vim.api.nvim_create_autocmd("TextYankPost", {
+  callback = function()
+    -- Only for normal yanks (no named register like "ay)
+    if vim.v.event.operator == 'y' and vim.v.event.regname == '' then
+      -- Copy from the unnamed register (what `p` uses)
+      osc52.copy_register('"')
+    end
+  end,
+})
 
 
 EOF
-
