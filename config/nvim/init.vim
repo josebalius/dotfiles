@@ -182,6 +182,12 @@ endfunction
 silent! unmap <C-LeftMouse>
 nnoremap <silent> <C-LeftMouse> <LeftMouse><Cmd>lua _G.ctrl_click_goto_def()<CR>
 
+let g:copilot_no_tab_map = v:true
+inoremap <silent><script><expr> <Tab> copilot#Accept("\<CR>")
+
+" Make blink's selected item look like the normal popup-menu selection
+highlight! link BlinkCmpMenuSelection PmenuSel
+
 " =================
 " Lua Configuration
 " =================
@@ -310,17 +316,43 @@ _G.ctrl_click_goto_def = function()
 end
 
 -- Completion: blink.cmp (local)
+-- Make sure the popup menu is used and shows a selection row
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
+
+-- Blink config (your values kept)
 require("blink.cmp").setup({
   fuzzy = { implementation = "lua" },
   keymap = { preset = "enter" },
-  completion = { menu = { auto_show = true } },
+  completion = {
+    menu = { auto_show = true },
+    list = {
+      selection = {
+        -- show and move a visible selection without auto-inserting text
+        preselect = true,
+        auto_insert = false,
+      },
+    },
+  },
 })
 
--- Extra: nice Insert-mode popup menu navigation
-vim.keymap.set("i", "<Down>", function() return vim.fn.pumvisible() == 1 and "<C-n>" or "<Down>" end, { expr = true, silent = true })
-vim.keymap.set("i", "<Up>",   function() return vim.fn.pumvisible() == 1 and "<C-p>" or "<Up>"   end, { expr = true, silent = true })
-vim.keymap.set("i", "<Tab>",      function() return vim.fn.pumvisible() == 1 and "<C-n>" or "<Tab>"    end, { expr = true, silent = true })
-vim.keymap.set("i", "<S-Tab>",    function() return vim.fn.pumvisible() == 1 and "<C-p>" or "<S-Tab>"  end, { expr = true, silent = true })
+-- Ensure the selection row has a strong highlight.
+-- Blink uses its own groups; if they exist, link them to your Pmenu/PmenuSel.
+pcall(vim.api.nvim_set_hl, 0, "Pmenu",     { bg = "#2a2a2a", fg = "#d0d0d0" })
+pcall(vim.api.nvim_set_hl, 0, "PmenuSel",  { bg = "#87afff", fg = "#000000", bold = true })
+
+for _, grp in ipairs({
+  "BlinkCmpMenu",            -- menu background
+  "BlinkCmpMenuBorder",      -- menu border
+  "BlinkCmpMenuSelection",   -- selected item row
+  "BlinkCmpGhostText",       -- inline ghost text
+}) do
+  if grp == "BlinkCmpMenuSelection" then
+    pcall(vim.api.nvim_set_hl, 0, grp, { link = "PmenuSel" })
+  else
+    pcall(vim.api.nvim_set_hl, 0, grp, { link = "Pmenu" })
+  end
+end
+
 
 -- Format TS/TSX on save via LSP if conform didn't run (fallback handled above)
 vim.api.nvim_create_autocmd("BufWritePre", {
@@ -333,6 +365,7 @@ vim.keymap.set('n', '<leader>yf', function()
   require('osc52').copy(path)
   vim.notify('osc52: copied path:\n' .. path, vim.log.levels.INFO)
 end, { desc = 'Yank file path to local clipboard via OSC52' })
+
 
 local osc52 = require('osc52')
 
