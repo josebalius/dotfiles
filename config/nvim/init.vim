@@ -183,10 +183,12 @@ silent! unmap <C-LeftMouse>
 nnoremap <silent> <C-LeftMouse> <LeftMouse><Cmd>lua _G.ctrl_click_goto_def()<CR>
 
 let g:copilot_no_tab_map = v:true
-inoremap <silent><script><expr> <Tab> copilot#Accept("\<CR>")
+" Use Tab to accept Copilot; if nothing to accept, insert a normal Tab
+inoremap <silent><script><expr> <Tab> copilot#Accept("\<Tab>")
 
-" Make blink's selected item look like the normal popup-menu selection
-highlight! link BlinkCmpMenuSelection PmenuSel
+" Keep visual selection when indenting
+vnoremap < <gv
+vnoremap > >gv
 
 " =================
 " Lua Configuration
