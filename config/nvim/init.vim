@@ -37,7 +37,9 @@ set backupdir=/tmp//
 set directory=/tmp//
 set undodir=/tmp//
 
-" ---------- Plugins ----------
+" ========================
+" Plugins (vim-plug)
+" ========================
 call plug#begin("~/.config/nvim/bundle")
 
 " Essentials
@@ -66,17 +68,17 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 
 " LSP / Completion
 Plug 'neovim/nvim-lspconfig'
-Plug 'pmizio/typescript-tools.nvim'         " from remote
-Plug 'Saghen/blink.cmp'                     " from local (keep)
-Plug 'mason-org/mason.nvim'                 " from remote
+Plug 'pmizio/typescript-tools.nvim'
+Plug 'Saghen/blink.cmp'
+Plug 'mason-org/mason.nvim'
 Plug 'nvim-lua/plenary.nvim'
-Plug 'stevearc/conform.nvim'                " from remote
+Plug 'stevearc/conform.nvim'
 
 " Languages
 Plug 'fatih/vim-go'
 Plug 'mrcjkb/rustaceanvim'
 
-" Themes (full set kept)
+" Themes
 Plug 'josebalius/darcula-dark.nvim'
 Plug 'tomasiser/vim-code-dark'
 Plug 'robertmeta/nofrils'
@@ -109,28 +111,45 @@ Plug 'github/copilot.vim'
 
 call plug#end()
 
-" ---------- Colors ----------
+" ========================
+" Colors / Look & Feel
+" ========================
 let g:codedark_modern = 1
 set background=dark
-colorscheme base16-bright" local default; you can switch with the helper funcs below
+colorscheme base16-bright  " local default; you can switch with helper funcs below
 
-" ---------- Filetype / Indent ----------
+" Make blink popup + selection visible and sane
+" (Pmenu / PmenuSel are also used as fallbacks)
+if has('termguicolors')
+  highlight Pmenu     guibg=#2a2a2a guifg=#d0d0d0
+  highlight PmenuSel  guibg=#87afff guifg=#000000 gui=bold
+endif
+
+" ========================
+" Filetype / Indent
+" ========================
 filetype plugin indent on
 
 augroup INDENT_SETTINGS
   autocmd!
-  autocmd Filetype typescript setlocal tabstop=4 shiftwidth=4   " local preference
-  autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2
-  autocmd Filetype css        setlocal tabstop=2 shiftwidth=2
-  autocmd Filetype scss       setlocal tabstop=2 shiftwidth=2
-  autocmd Filetype go         setlocal tabstop=4 shiftwidth=4
+  autocmd Filetype typescript  setlocal tabstop=4 shiftwidth=4
+  autocmd Filetype javascript  setlocal tabstop=2 shiftwidth=2
+  autocmd Filetype css         setlocal tabstop=2 shiftwidth=2
+  autocmd Filetype scss        setlocal tabstop=2 shiftwidth=2
+  autocmd Filetype go          setlocal tabstop=4 shiftwidth=4
   autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
   autocmd BufWritePre *.rb :%s/\s\+$//e
   autocmd FileType javascript setlocal indentexpr=
 augroup END
 
-" ---------- FZF Commands ----------
-command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
+" ========================
+" FZF Commands
+" ========================
+command! -bang -nargs=* Ag call fzf#vim#ag(
+      \ <q-args>,
+      \ fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}),
+      \ <bang>0)
+
 command! -bang -nargs=* GGrep
       \ call fzf#vim#grep(
       \   'git grep --line-number -- '.shellescape(<q-args>),
@@ -141,9 +160,11 @@ command! -bang -nargs=* GGrep
       \   }),
       \   <bang>0)
 
+" ========================
+" Keymaps (Vimscript)
+" ========================
 
-
-" ---------- Keymaps ----------
+" -------- Navigation / Tabs / Windows --------
 map ; :Files<CR>
 noremap gg :GGrep<CR>
 noremap vv :<C-u>vsplit<CR>
@@ -159,6 +180,8 @@ noremap <C-J> <C-W><C-J>
 noremap <C-K> <C-W><C-K>
 noremap <C-L> <C-W><C-L>
 nnoremap <F3> :set hlsearch!<CR>
+
+" Commentary on visual selection
 noremap <C-c> :<C-u>'<,'>Commentary<CR>
 
 " Mouse word search
@@ -172,81 +195,125 @@ noremap <Leader>b   :w<CR>:GoBuild<CR>
 noremap <Leader>im  :GoImplements<CR>
 noremap <Leader>ref :GoReferrers<CR>
 
+" Keep visual selection when indenting
+vnoremap < <gv
+vnoremap > >gv
+
+" Save with Ctrl-S, always end in NORMAL mode
+nnoremap <C-s> :w<CR>
+inoremap <C-s> <Esc>:w<CR>
+xnoremap <C-s> <Esc>:w<CR>gv
+
+" ---------- Copilot ----------
+let g:copilot_no_tab_map = v:true
+" Use Tab to accept Copilot; if nothing to accept, insert a normal Tab
+inoremap <silent><script><expr> <Tab> copilot#Accept("\<Tab>")
+
 " ---------- Helpers ----------
 function! SynGroup()
   let l:s = synID(line('.'), col('.'), 1)
   echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
 endfunction
 
-" ---------- Smart Ctrl-click (LSP goto def; fallback tags) ----------
+" Smart Ctrl-click (LSP goto def; fallback to tags)
 silent! unmap <C-LeftMouse>
 nnoremap <silent> <C-LeftMouse> <LeftMouse><Cmd>lua _G.ctrl_click_goto_def()<CR>
-
-let g:copilot_no_tab_map = v:true
-" Use Tab to accept Copilot; if nothing to accept, insert a normal Tab
-inoremap <silent><script><expr> <Tab> copilot#Accept("\<Tab>")
-
-" Keep visual selection when indenting
-vnoremap < <gv
-vnoremap > >gv
 
 " =================
 " Lua Configuration
 " =================
 lua << EOF
+-- ============
+-- Core Requires
+-- ============
+local lspconfig          = require('lspconfig')
+local ts_tools           = require('typescript-tools')
+local conform            = require('conform')
+local treesitter_configs = require('nvim-treesitter.configs')
+local mason              = require('mason')
+local blink              = require('blink.cmp')
+local osc52              = require('osc52')
+
+-- ============
 -- Treesitter
-require('nvim-treesitter.configs').setup({
+-- ============
+treesitter_configs.setup({
   ensure_installed = { "rust", "go", "typescript", "tsx" },
   sync_install = true,
-  auto_install  = true,
+  auto_install = true,
   highlight = {
-    enable = false,                       -- keep your local setting
+    enable = false,  -- keep your local preference
     additional_vim_regex_highlighting = false,
   },
 })
 
--- OSC52 (remote)
-require('osc52').setup({
+-- ============
+-- OSC52
+-- ============
+osc52.setup({
   max_length = 0,
   silent = false,
   trim = false,
   tmux_passthrough = true,
 })
-vim.keymap.set('n', '<leader>c', require('osc52').copy_operator, {expr = true})
-vim.keymap.set('n', '<leader>cc', '<leader>c_', {remap = true})
-vim.keymap.set('v', '<leader>c', require('osc52').copy_visual)
 
--- Mason (remote)
-require("mason").setup()
+vim.keymap.set('n', '<leader>c',  osc52.copy_operator, { expr = true })
+vim.keymap.set('n', '<leader>cc', '<leader>c_',         { remap = true })
+vim.keymap.set('v', '<leader>c',  osc52.copy_visual)
 
--- LSP common helpers
-local lspconfig = require('lspconfig')
+-- ============
+-- Mason
+-- ============
+mason.setup()
 
--- Go (local kept)
+-- ============
+-- LSP: Go
+-- ============
 lspconfig.gopls.setup({
-  on_attach = function(client, bufnr)
+  on_attach = function(_, bufnr)
     local opts = { buffer = bufnr, noremap = true, silent = true }
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-    vim.keymap.set("n", "K",  vim.lsp.buf.hover, opts)
-    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-    vim.keymap.set("n", "<leader>e", function() vim.diagnostic.open_float(nil, { scope = "line" }) end, opts)
+    vim.keymap.set("n", "gd",         vim.lsp.buf.definition,        opts)
+    vim.keymap.set("n", "gr",         vim.lsp.buf.references,        opts)
+    vim.keymap.set("n", "K",          vim.lsp.buf.hover,             opts)
+    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action,       opts)
+    vim.keymap.set("n", "<leader>e",  function()
+      vim.diagnostic.open_float(nil, { scope = "line" })
+    end, opts)
   end,
   settings = {
-    gopls = { analyses = { unusedparams = true, shadow = true }, staticcheck = true },
+    gopls = {
+      analyses    = { unusedparams = true, shadow = true },
+      staticcheck = true,
+    },
   },
   flags = { debounce_text_changes = 150 },
 })
 
--- Rust (local kept)
+-- ============
+-- LSP: Rust
+-- ============
 lspconfig.rust_analyzer.setup({
   settings = {
     ["rust-analyzer"] = {
       diagnostics = { enable = true },
-      cargo = { allFeatures = true, loadOutDirsFromCheck = true, runBuildScripts = true },
-      procMacro = { enable = true, ignored = { leptos_macro = { "component", "server" } } },
-      imports = { granularity = { group = "module" }, prefix = "self" },
-      completion = { addCallArgumentSnippets = false, addCallParenthesis = false, autoimport = { enable = true } },
+      cargo = {
+        allFeatures            = true,
+        loadOutDirsFromCheck   = true,
+        runBuildScripts        = true,
+      },
+      procMacro = {
+        enable  = true,
+        ignored = { leptos_macro = { "component", "server" } },
+      },
+      imports = {
+        granularity = { group = "module" },
+        prefix      = "self",
+      },
+      completion = {
+        addCallArgumentSnippets = false,
+        addCallParenthesis      = false,
+        autoimport              = { enable = true },
+      },
     },
   },
   on_attach = function(client, bufnr)
@@ -255,7 +322,7 @@ lspconfig.rust_analyzer.setup({
         buffer = bufnr,
         callback = function()
           vim.lsp.buf.execute_command({
-            command = "rust-analyzer.organizeImports",
+            command   = "rust-analyzer.organizeImports",
             arguments = { vim.uri_from_bufnr(bufnr) },
           })
         end,
@@ -264,49 +331,64 @@ lspconfig.rust_analyzer.setup({
   end,
 })
 
--- TypeScript via typescript-tools (from remote; preferred over typescript.nvim)
-local ts_tools = require('typescript-tools')
+-- ============
+-- LSP: TypeScript (typescript-tools)
+-- ============
 ts_tools.setup({
-  on_attach = function(client, bufnr)
+  on_attach = function(_, bufnr)
     local opts = { buffer = bufnr, remap = false, noremap = true, silent = true }
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-    vim.keymap.set("n", "K",  vim.lsp.buf.hover, opts)
-    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+    vim.keymap.set("n", "gd",         vim.lsp.buf.definition,  opts)
+    vim.keymap.set("n", "K",          vim.lsp.buf.hover,       opts)
+    vim.keymap.set("n", "gr",         vim.lsp.buf.references,  opts)
     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-    vim.keymap.set("n", "<leader>e", function() vim.diagnostic.open_float(nil, { scope = "line" }) end, opts)
-    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+    vim.keymap.set("n", "<leader>e", function()
+      vim.diagnostic.open_float(nil, { scope = "line" })
+    end, opts)
+    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename,      opts)
   end,
   settings = {
     tsserver_file_preferences = {
-      includeInlayParameterNameHints = "all",
+      includeInlayParameterNameHints                      = "all",
       includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-      includeInlayFunctionParameterTypeHints = true,
-      includeInlayVariableTypeHints = true,
-      includeInlayPropertyDeclarationTypeHints = true,
-      includeInlayFunctionLikeReturnTypeHints = true,
-      includeInlayEnumMemberValueHints = true,
+      includeInlayFunctionParameterTypeHints              = true,
+      includeInlayVariableTypeHints                       = true,
+      includeInlayPropertyDeclarationTypeHints            = true,
+      includeInlayFunctionLikeReturnTypeHints             = true,
+      includeInlayEnumMemberValueHints                    = true,
     },
   },
 })
 
--- Format TS/TSX on save (Conform + prettierd, from remote)
-require("conform").setup({
+-- ============
+-- Formatting: Conform
+-- ============
+conform.setup({
   formatters_by_ft = {
-    typescript = { "prettierd", stop_after_first = true },
-    tsx        = { "prettierd", stop_after_first = true },
-    typescriptreact = { "prettierd", stop_after_first = true },
-    javascript = { "prettierd", stop_after_first = true },
-    javascriptreact = { "prettierd", stop_after_first = true },
+    typescript       = { "prettierd", stop_after_first = true },
+    tsx              = { "prettierd", stop_after_first = true },
+    typescriptreact  = { "prettierd", stop_after_first = true },
+    javascript       = { "prettierd", stop_after_first = true },
+    javascriptreact  = { "prettierd", stop_after_first = true },
   },
   format_on_save = { timeout_ms = 500, lsp_format = "fallback" },
 })
 
--- Ctrl-click smart goto def with fallback to tags
+-- LSP-format fallback on save for TS/JS if Conform didn't run
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = { "*.ts", "*.tsx", "*.js", "*.jsx" },
+  callback = function()
+    vim.lsp.buf.format({ async = false })
+  end,
+})
+
+-- ============
+-- Ctrl-click smart goto-definition with tags fallback
+-- ============
 _G.ctrl_click_goto_def = function()
   local bufnr = vim.api.nvim_get_current_buf()
   local clients = (vim.lsp.buf_get_clients and vim.lsp.buf_get_clients(bufnr))
-               or (vim.lsp.get_clients and vim.lsp.get_clients({ bufnr = bufnr }))
-               or {}
+                  or (vim.lsp.get_clients      and vim.lsp.get_clients({ bufnr = bufnr }))
+                  or {}
   for _, c in pairs(clients) do
     local caps = c.server_capabilities or c.resolved_capabilities
     if caps and (caps.definitionProvider or caps.goto_definition) then
@@ -317,62 +399,45 @@ _G.ctrl_click_goto_def = function()
   vim.cmd('normal! <C-]>')
 end
 
--- Completion: blink.cmp (local)
--- Make sure the popup menu is used and shows a selection row
+-- ============
+-- Completion: blink.cmp
+-- ============
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
--- Blink config (your values kept)
-require("blink.cmp").setup({
+blink.setup({
   fuzzy = { implementation = "lua" },
-  keymap = { preset = "enter" },
+  keymap = {
+    preset = "enter",
+    -- Enter accepts, fallback inserts newline
+    ["<CR>"] = { "accept", "fallback" },
+  },
   completion = {
     menu = { auto_show = true },
     list = {
       selection = {
-        -- show and move a visible selection without auto-inserting text
-        preselect = true,
+        preselect   = true,
         auto_insert = false,
       },
     },
   },
 })
 
--- Ensure the selection row has a strong highlight.
--- Blink uses its own groups; if they exist, link them to your Pmenu/PmenuSel.
-pcall(vim.api.nvim_set_hl, 0, "Pmenu",     { bg = "#2a2a2a", fg = "#d0d0d0" })
-pcall(vim.api.nvim_set_hl, 0, "PmenuSel",  { bg = "#87afff", fg = "#000000", bold = true })
+-- Ensure blink highlight groups link nicely to popup menu colors
+pcall(vim.api.nvim_set_hl, 0, "BlinkCmpMenu",          { link = "Pmenu" })
+pcall(vim.api.nvim_set_hl, 0, "BlinkCmpMenuBorder",    { link = "Pmenu" })
+pcall(vim.api.nvim_set_hl, 0, "BlinkCmpGhostText",     { link = "Pmenu" })
+pcall(vim.api.nvim_set_hl, 0, "BlinkCmpMenuSelection", { link = "PmenuSel" })
 
-for _, grp in ipairs({
-  "BlinkCmpMenu",            -- menu background
-  "BlinkCmpMenuBorder",      -- menu border
-  "BlinkCmpMenuSelection",   -- selected item row
-  "BlinkCmpGhostText",       -- inline ghost text
-}) do
-  if grp == "BlinkCmpMenuSelection" then
-    pcall(vim.api.nvim_set_hl, 0, grp, { link = "PmenuSel" })
-  else
-    pcall(vim.api.nvim_set_hl, 0, grp, { link = "Pmenu" })
-  end
-end
-
-
--- Format TS/TSX on save via LSP if conform didn't run (fallback handled above)
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = { "*.ts", "*.tsx", "*.js", "*.jsx" },
-  callback = function() vim.lsp.buf.format({ async = false }) end,
-})
-
+-- ============
+-- OSC52 extras
+-- ============
 vim.keymap.set('n', '<leader>yf', function()
   local path = vim.fn.expand('%:p')
-  require('osc52').copy(path)
+  osc52.copy(path)
 end, { desc = 'Yank file path to local clipboard via OSC52' })
 
-
-local osc52 = require('osc52')
-
--- Normal mode: copy GBrowse URL for current position
+-- Yank GBrowse URL (normal)
 vim.keymap.set('n', '<leader>gy', function()
-  -- Run :GBrowse and capture its output (the URL)
   local ok, out = pcall(vim.fn.execute, 'GBrowse!')
   if not ok then
     vim.notify('GBrowse failed: ' .. tostring(out), vim.log.levels.ERROR)
@@ -388,9 +453,8 @@ vim.keymap.set('n', '<leader>gy', function()
   osc52.copy(url)
 end, { desc = 'Yank GBrowse URL via OSC52' })
 
--- Visual mode: copy GBrowse URL for selected range (line anchors)
+-- Yank GBrowse URL (visual selection)
 vim.keymap.set('v', '<leader>gy', function()
-  -- Use the visual range with GBrowse
   local ok, out = pcall(vim.fn.execute, "'<,'>GBrowse!")
   if not ok then
     vim.notify('GBrowse (visual) failed: ' .. tostring(out), vim.log.levels.ERROR)
@@ -406,16 +470,12 @@ vim.keymap.set('v', '<leader>gy', function()
   osc52.copy(url)
 end, { desc = 'Yank GBrowse URL for selection via OSC52' })
 
--- Also send every normal yank to OSC52 so it reaches your local clipboard
+-- Mirror all unnamed-register yanks to OSC52 (so y/p + Cmd-V "just work")
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
-    -- Only for normal yanks (no named register like "ay)
     if vim.v.event.operator == 'y' and vim.v.event.regname == '' then
-      -- Copy from the unnamed register (what `p` uses)
       osc52.copy_register('"')
     end
   end,
 })
-
-
 EOF
