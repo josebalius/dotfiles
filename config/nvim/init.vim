@@ -65,6 +65,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
 Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'nvim-mini/mini.indentscope'
 
 " LSP / Completion
 Plug 'neovim/nvim-lspconfig'
@@ -478,4 +479,41 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     end
   end,
 })
+
+local ibl = require("ibl")
+local hooks = require("ibl.hooks")
+-- Set indent colors using ibl's highlight hook so they aren't overridden
+hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+  -- Inactive rails: just a tad lighter than black
+  vim.api.nvim_set_hl(0, "IblIndent", { fg = "#202020" })  -- tweak this value to taste
+end)
+
+ibl.setup({
+  indent = {
+    char = "│",
+    highlight = "IblIndent",
+  },
+  scope = {
+    enabled = false,  -- we'll handle the active indent with mini.indentscope
+  },
+})
+
+-- Active indent guide: mini.indentscope
+local indentscope = require("mini.indentscope")
+
+-- Bright color for the current indent level guide
+vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { fg = "#303030" })
+
+indentscope.setup({
+  symbol = "│",  -- same glyph as ibl so it looks like one rail
+  draw = {
+    -- no animation; just snap to the current indent
+    animation = indentscope.gen_animation.none(),
+  },
+  options = {
+    try_as_border = true,
+  },
+})
+
 EOF
+
