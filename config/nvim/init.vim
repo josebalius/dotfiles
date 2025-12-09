@@ -485,7 +485,7 @@ local hooks = require("ibl.hooks")
 -- Set indent colors using ibl's highlight hook so they aren't overridden
 hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
   -- Inactive rails: just a tad lighter than black
-  vim.api.nvim_set_hl(0, "IblIndent", { fg = "#202020" })  -- tweak this value to taste
+  vim.api.nvim_set_hl(0, "IblIndent", { fg = "#0c0c0c" })  -- tweak this value to taste
 end)
 
 ibl.setup({
@@ -516,4 +516,3 @@ indentscope.setup({
 })
 
 EOF
-
