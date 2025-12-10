@@ -217,7 +217,11 @@ function! SynGroup()
 endfunction
 
 " Smart Ctrl-click (LSP goto def; fallback to tags)
-nnoremap <C-LeftMouse> <LeftMouse><C-]>
+silent! unmap <C-LeftMouse>
+nnoremap <silent> <C-LeftMouse> <LeftMouse><Cmd>lua _G.smart_goto_def()<CR>
+
+" Smart Ctrl-] (LSP goto def; fallback to normal tag behavior)
+nnoremap <silent> <C-]> <Cmd>lua _G.smart_goto_def()<CR>
 
 " Comment in NORMAL mode
 nnoremap <C-_> :Commentary<CR>
@@ -388,13 +392,17 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 -- ============
--- Ctrl-click smart goto-definition with tags fallback
+-- Smart goto-definition: LSP first, then normal tag jump (<C-]>)
 -- ============
-_G.ctrl_click_goto_def = function()
+_G.smart_goto_def = function()
   local bufnr = vim.api.nvim_get_current_buf()
-  local clients = (vim.lsp.buf_get_clients and vim.lsp.buf_get_clients(bufnr))
-                  or (vim.lsp.get_clients      and vim.lsp.get_clients({ bufnr = bufnr }))
-                  or {}
+
+  -- New Neovim API – no deprecated calls
+  local clients = {}
+  if vim.lsp.get_clients then
+    clients = vim.lsp.get_clients({ bufnr = bufnr })
+  end
+
   for _, c in pairs(clients) do
     local caps = c.server_capabilities or c.resolved_capabilities
     if caps and (caps.definitionProvider or caps.goto_definition) then
@@ -402,6 +410,8 @@ _G.ctrl_click_goto_def = function()
       return
     end
   end
+
+  -- No LSP with definition support → fall back to built-in tag jump
   vim.cmd('normal! <C-]>')
 end
 
@@ -519,6 +529,41 @@ indentscope.setup({
     try_as_border = true,
   },
 })
+
+-- ============
+-- LSP: Sorbet (Ruby)
+-- Only enabled when bundle is available and project has sorbet/config
+-- ============
+do
+  local lspconfig = require("lspconfig")
+  local util      = require("lspconfig.util")
+
+  -- Only try if `bundle` exists (so `bundle exec srb` can run)
+  if vim.fn.executable("bundle") == 1 then
+    lspconfig.sorbet.setup({
+      -- Run Sorbet in LSP mode through Bundler
+      cmd = { "bundle", "exec", "srb", "tc", "--lsp", "--disable-watchman" },
+
+      -- Only attach in projects that look like Sorbet projects
+      root_dir = util.root_pattern("sorbet/config", "Gemfile", ".git"),
+
+      single_file_support = false,
+
+      on_attach = function(client, bufnr)
+        -- Reuse your usual LSP keymaps
+        local opts = { buffer = bufnr, noremap = true, silent = true }
+        vim.keymap.set("n", "gd",         vim.lsp.buf.definition,  opts)
+        vim.keymap.set("n", "gr",         vim.lsp.buf.references,  opts)
+        vim.keymap.set("n", "K",          vim.lsp.buf.hover,       opts)
+        vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+        vim.keymap.set("n", "<leader>e", function()
+          vim.diagnostic.open_float(nil, { scope = "line" })
+        end, opts)
+        vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename,      opts)
+      end,
+    })
+  end
+end
 
 EOF
 
