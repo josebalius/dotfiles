@@ -1,0 +1,14 @@
+font-family = "Berkeley Mono SemiCondensed"
+font-style = ""
+font-size = 12
+font-feature = -calt
+font-thicken = true
+adjust-cell-height = 6
+theme = Konsolas
+cursor-style = block
+cursor-style-blink = false
+shell-integration-features = no-cursor
+clipboard-write = allow
+clipboard-read  = allow
+keybind = cmd+s=text:\x13
+keybind = cmd+slash=text:\x1f
