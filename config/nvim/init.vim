@@ -1,4 +1,4 @@
-" =========================
+" ========================
 " Neovim Config (Reconciled)
 " =========================
 
@@ -217,8 +217,13 @@ function! SynGroup()
 endfunction
 
 " Smart Ctrl-click (LSP goto def; fallback to tags)
-silent! unmap <C-LeftMouse>
-nnoremap <silent> <C-LeftMouse> <LeftMouse><Cmd>lua _G.ctrl_click_goto_def()<CR>
+nnoremap <C-LeftMouse> <LeftMouse><C-]>
+
+" Comment in NORMAL mode
+nnoremap <C-_> :Commentary<CR>
+
+" Comment in VISUAL mode (keep selection)
+xnoremap <C-_> :Commentary<CR>gv
 
 " =================
 " Lua Configuration
@@ -516,3 +521,5 @@ indentscope.setup({
 })
 
 EOF
+
+
