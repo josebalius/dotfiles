@@ -229,6 +229,28 @@ nnoremap <C-_> :Commentary<CR>
 " Comment in VISUAL mode (keep selection)
 xnoremap <C-_> :Commentary<CR>gv
 
+" -------------------------
+" LSP references list UX
+" - Enter or double-click jumps
+" - Auto-close quickfix/loclist after jump
+" -------------------------
+augroup QF_UX
+  autocmd!
+  " When entering quickfix or location-list windows...
+  autocmd FileType qf call s:setup_qf_mappings()
+augroup END
+
+function! s:setup_qf_mappings() abort
+  " Jump on Enter
+  nnoremap <silent><buffer> <CR> <CR>:cclose<CR>
+
+  " Jump on double click
+  nnoremap <silent><buffer> <2-LeftMouse> <CR>:cclose<CR>
+
+  " Optional: jump on single click (if you want it)
+  " nnoremap <silent><buffer> <LeftMouse> <LeftMouse><CR>:cclose<CR>
+endfunction
+
 " =================
 " Lua Configuration
 " =================
