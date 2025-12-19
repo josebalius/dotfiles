@@ -12,3 +12,10 @@ clipboard-write = allow
 clipboard-read  = allow
 keybind = cmd+s=text:\x13
 keybind = cmd+slash=text:\x1f
+keybind = cmd+w=text:\x1b,q
+
+# Cmd+Z -> undo
+keybind = cmd+z=text:\x1bu
+
+# Cmd+R -> redo
+keybind = cmd+r=text:\x1b\x12
