@@ -29,3 +29,12 @@ This supports the following tools:
 This repo uses the wonderful [Vim Plug](https://github.com/junegunn/vim-plug) tool to manage vim plugins. If you'd like to add plugins, simply add them between the opening and closing plug statements in the `vimrc` file.
 
 ## My dotfiles
+
+## Reports
+
+This repository now includes competitive intelligence and market analysis reports:
+
+- **[Competitive Analysis Reports](reports/)** - Market intelligence on AI coding assistants and development tools
+  - [Codex vs GitHub Copilot Analysis](reports/competitive-analysis/codex-vs-github-copilot-2024.md)
+  - [Executive Summary](reports/competitive-analysis/executive-summary.md)
+  - [Implementation Guide](reports/competitive-analysis/implementation-guide.md)
