@@ -251,6 +251,32 @@ function! s:setup_qf_mappings() abort
   " nnoremap <silent><buffer> <LeftMouse> <LeftMouse><CR>:cclose<CR>
 endfunction
 
+" ==========================
+" ESC closes quickfix window
+" ==========================
+function! s:qf_is_open() abort
+  " getwininfo() includes quickfix=1 for quickfix/location-list windows
+  return !empty(filter(getwininfo(), 'v:val.quickfix'))
+endfunction
+
+function! s:esc_or_close_qf() abort
+  " Only intercept when not in insert mode (n/v/o/etc)
+  if mode() !=# 'i' && <SID>qf_is_open()
+    " Close quickfix (harmless if it's actually a location list window too)
+    silent! cclose
+    " Also try closing location list in case that's what opened
+    silent! lclose
+    return
+  endif
+
+  " Otherwise: behave like a normal <Esc>
+  call feedkeys("\<Esc>", "n")
+endfunction
+
+nnoremap <silent> <Esc> :call <SID>esc_or_close_qf()<CR>
+xnoremap <silent> <Esc> :call <SID>esc_or_close_qf()<CR>
+onoremap <silent> <Esc> :call <SID>esc_or_close_qf()<CR>
+
 " =================
 " Lua Configuration
 " =================
