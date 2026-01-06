@@ -277,6 +277,12 @@ nnoremap <silent> <Esc> :call <SID>esc_or_close_qf()<CR>
 xnoremap <silent> <Esc> :call <SID>esc_or_close_qf()<CR>
 onoremap <silent> <Esc> :call <SID>esc_or_close_qf()<CR>
 
+" ==========================
+" Right-click LSP actions
+" ==========================
+amenu PopUp.Go\ to\ References :lua vim.lsp.buf.references()<CR>
+amenu PopUp.Go\ Back :normal! <C-o><CR>
+
 " =================
 " Lua Configuration
 " =================
