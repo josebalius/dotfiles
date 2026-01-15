@@ -175,6 +175,9 @@ noremap <Leader>t :<C-u>tabnew<CR>
 noremap <Tab>      :<C-u>tabnext<CR>
 noremap <S-Tab>    :<C-u>tabprevious<CR>
 noremap <Leader>q :q<CR>
+noremap <M-q> :q<CR>
+noremap <M-u> u
+noremap <M-r> <C-r>
 noremap <Leader>w :w<CR>
 noremap <C-H> <C-W><C-H>
 noremap <C-J> <C-W><C-J>
@@ -340,6 +343,7 @@ lspconfig.gopls.setup({
     vim.keymap.set("n", "gr",         vim.lsp.buf.references,        opts)
     vim.keymap.set("n", "K",          vim.lsp.buf.hover,             opts)
     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action,       opts)
+    vim.keymap.set("n", "<M-.>",      vim.lsp.buf.code_action,       opts)
     vim.keymap.set("n", "<leader>e",  function()
       vim.diagnostic.open_float(nil, { scope = "line" })
     end, opts)
@@ -405,6 +409,7 @@ ts_tools.setup({
     vim.keymap.set("n", "K",          vim.lsp.buf.hover,       opts)
     vim.keymap.set("n", "gr",         vim.lsp.buf.references,  opts)
     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+    vim.keymap.set("n", "<M-.>",      vim.lsp.buf.code_action, opts)
     vim.keymap.set("n", "<leader>e", function()
       vim.diagnostic.open_float(nil, { scope = "line" })
     end, opts)
@@ -610,6 +615,7 @@ do
         vim.keymap.set("n", "gr",         vim.lsp.buf.references,  opts)
         vim.keymap.set("n", "K",          vim.lsp.buf.hover,       opts)
         vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+        vim.keymap.set("n", "<M-.>",      vim.lsp.buf.code_action, opts)
         vim.keymap.set("n", "<leader>e", function()
           vim.diagnostic.open_float(nil, { scope = "line" })
         end, opts)
