@@ -3,6 +3,10 @@
 Test
 This repo is a starting point for using custom dotfiles (terminal / editor configuration) with GitHub Codespaces
 
+## Author
+
+Jose
+
 ## How to use this repo
 
 In order to use this template, 
