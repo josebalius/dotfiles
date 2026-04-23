@@ -1,6 +1,7 @@
 # Codespaces Dotfiles Template
 
-Test
+Hi, I'm jose! 👋
+
 This repo is a starting point for using custom dotfiles (terminal / editor configuration) with GitHub Codespaces
 
 ## How to use this repo
@@ -27,3 +28,11 @@ This supports the following tools:
 ## Vim Plugins
 
 This repo uses the wonderful [Vim Plug](https://github.com/junegunn/vim-plug) tool to manage vim plugins. If you'd like to add plugins, simply add them between the opening and closing plug statements in the `vimrc` file.
+
+## Jokes
+
+> Why did the dotfiles developer get kicked out of the party? Because every time someone asked where their settings were, they said "they're hidden — you just have to know to look for them."
+
+> Jose's dotfiles are technically "hidden" files — which is fitting, because his entire development environment lives inside a Codespace that disappears the moment he closes his laptop.
+
+> Jose's dotfiles repo is like a Switzerland of the editor wars — it hosts both vim and emacs configs, not because it's neutral, but because it's too afraid to lose friends at the hackathon.
