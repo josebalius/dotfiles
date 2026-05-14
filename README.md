@@ -1,8 +1,8 @@
 # Codespaces Dotfiles Template
 
 Test
-Maintainer: josebalius
 This repo is a starting point for using custom dotfiles (terminal / editor configuration) with GitHub Codespaces
+Maintainer: josebalius
 
 ## How to use this repo
 
