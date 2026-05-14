@@ -2,7 +2,6 @@
 
 Test
 This repo is a starting point for using custom dotfiles (terminal / editor configuration) with GitHub Codespaces
-Maintainer: josebalius
 
 ## How to use this repo
 
@@ -28,3 +27,7 @@ This supports the following tools:
 ## Vim Plugins
 
 This repo uses the wonderful [Vim Plug](https://github.com/junegunn/vim-plug) tool to manage vim plugins. If you'd like to add plugins, simply add them between the opening and closing plug statements in the `vimrc` file.
+
+## Maintainers
+
+- josebalius
