@@ -2,6 +2,7 @@
 
 Test
 This repo is a starting point for using custom dotfiles (terminal / editor configuration) with GitHub Codespaces
+Repository owner: `josebalius`.
 
 ## How to use this repo
 
