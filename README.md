@@ -1,5 +1,7 @@
 # Codespaces Dotfiles Template
 
+2024-06-09
+
 Test
 This repo is a starting point for using custom dotfiles (terminal / editor configuration) with GitHub Codespaces
 
