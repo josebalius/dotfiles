@@ -1,0 +1,15 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
+.parcel-cache
+
+# Lock files (optional - usually committed but can be large)
+pnpm-lock.yaml
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
