@@ -1,6 +1,7 @@
 # Codespaces Dotfiles Template
 
-Test
+jose
+
 This repo is a starting point for using custom dotfiles (terminal / editor configuration) with GitHub Codespaces
 
 ## How to use this repo
@@ -27,3 +28,11 @@ This supports the following tools:
 ## Vim Plugins
 
 This repo uses the wonderful [Vim Plug](https://github.com/junegunn/vim-plug) tool to manage vim plugins. If you'd like to add plugins, simply add them between the opening and closing plug statements in the `vimrc` file.
+
+## Jokes
+
+> A developer spins up a GitHub Codespace, runs `install.sh`, and watches it symlink tmux, vim, neovim nightly, zsh, screen, *and* emacs configs — all to the same machine. A bystander asks, *"Why do you need five terminal tools?"* The developer replies, *"One for each pane of tmux, obviously."*
+
+> A developer dies and arrives at the pearly gates. St. Peter says, "Before you enter, you must set up your development environment." The developer sighs, opens their dotfiles repo, and three hours later they're still arguing with themselves about whether the tmux prefix should be `C-a` or `C-b` — turns out, purgatory was just a Codespace all along.
+
+> Why did the developer push their dotfiles to GitHub Codespaces? Because after configuring tmux, vim, neovim nightly, emacs, screen, zsh, ghostty, and 30 colorschemes, their laptop finally filed for worker's comp — so now it's Microsoft's servers that get to overheat at 3am.
