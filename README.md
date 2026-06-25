@@ -1,6 +1,7 @@
 # Codespaces Dotfiles Template
 
-Test
+jose
+
 This repo is a starting point for using custom dotfiles (terminal / editor configuration) with GitHub Codespaces
 
 ## How to use this repo
@@ -27,3 +28,19 @@ This supports the following tools:
 ## Vim Plugins
 
 This repo uses the wonderful [Vim Plug](https://github.com/junegunn/vim-plug) tool to manage vim plugins. If you'd like to add plugins, simply add them between the opening and closing plug statements in the `vimrc` file.
+
+## Jokes
+
+> The `vimrc` has **twelve colorschemes** — gruvbox, darcula, molokai, nord, xcode, github, envy, paper, iceberg, codedark… all commented out — while `vividchalk` sits at the top, completely alone, wondering why it was chosen but never truly celebrated.
+>
+> Meanwhile, an `emacs` config quietly lives in the same repo, not saying a word, just waiting for the colorscheme crisis to finally break the developer.
+>
+> A programmer's `vimrc` is just a support group for colorschemes they almost committed to.
+
+---
+
+> The `install.sh` carefully symlinks both a `.vimrc` **and** a `.emacs`, then immediately runs `rm -rf $HOME/.config` — turns out the real editor war was the configs we nuked along the way.
+
+---
+
+> The `vimrc` has 11 colorschemes installed, 40 plugins, and 234 lines of carefully tuned configuration — meanwhile the `zshrc` just has `plugins=(git)` and the quiet confidence of someone who gave up halfway through.
