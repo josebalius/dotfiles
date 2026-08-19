@@ -10,6 +10,12 @@ cursor-style-blink = false
 shell-integration-features = no-cursor
 clipboard-write = allow
 clipboard-read  = allow
+mouse-hide-while-typing = true
+macos-option-as-alt = true
+window-padding-x = 4
+window-padding-y = 4
+window-padding-balance = true
+
 keybind = cmd+s=text:\x13
 keybind = cmd+slash=text:\x1f
 keybind = cmd+w=text:\x1bq

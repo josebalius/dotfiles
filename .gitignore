@@ -1,0 +1,10 @@
+# Plugin bundles downloaded by vim-plug
+config/nvim/bundle/
+vim/plugged/
+
+# OS and temporary files
+.DS_Store
+*.swp
+*.swo
+*.log
+*.tmp
