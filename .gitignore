@@ -8,3 +8,5 @@ vim/plugged/
 *.swo
 *.log
 *.tmp
+*.local
+*.bak

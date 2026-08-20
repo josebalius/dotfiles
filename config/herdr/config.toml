@@ -1,0 +1,100 @@
+# -----------------------------------------------------------------------------
+# Herdr Configuration
+# Matrix / Cyberpunk Hacker HUD Aesthetic & Tmux/Zellij Unified Keybindings
+# -----------------------------------------------------------------------------
+
+onboarding = false
+
+[theme]
+name = "terminal"
+
+[theme.custom]
+sidebar_bg = "#070b0e"
+panel_bg = "#020406"
+active_row_bg = "#002b18"
+selection_bg = "#003b22"
+surface0 = "#0b1512"
+surface1 = "#12201c"
+overlay0 = "#1b332b"
+overlay1 = "#2c4f44"
+text = "#d8ffee"
+subtext0 = "#6ba68c"
+accent = "#00ff66"
+green = "#00ff66"
+teal = "#00f0ff"
+red = "#ff2a5f"
+yellow = "#ffe600"
+blue = "#00b4d8"
+mauve = "#b300ff"
+
+[terminal]
+shell_mode = "auto"
+new_cwd = "follow"
+
+[keys]
+# Prefix key
+prefix = "ctrl+b"
+
+# Splits: | for vertical split (pane right), - for horizontal split (pane down)
+split_vertical = ["prefix+|", "prefix+v"]
+split_horizontal = "prefix+minus"
+
+# Pane Navigation & Management
+focus_pane_left = "prefix+h"
+focus_pane_down = "prefix+j"
+focus_pane_up = "prefix+k"
+focus_pane_right = "prefix+l"
+close_pane = "prefix+x"
+zoom = "prefix+z"
+resize_mode = "prefix+r"
+edit_scrollback = ["prefix+[", "prefix+e"]
+
+# Tabs: c for new tab, n/p for next/prev tab, 1..9 for jump, comma for rename
+new_tab = "prefix+c"
+rename_tab = ["prefix+comma", "prefix+shift+t"]
+previous_tab = "prefix+p"
+next_tab = "prefix+n"
+switch_tab = "prefix+1..9"
+close_tab = "prefix+shift+x"
+
+# Workspaces & Session: w for picker, d for detach
+workspace_picker = "prefix+w"
+detach = ["prefix+d", "prefix+ctrl+d", "prefix+q"]
+new_workspace = "prefix+shift+n"
+rename_workspace = "prefix+shift+w"
+close_workspace = "prefix+shift+d"
+toggle_sidebar = "prefix+b"
+goto = "prefix+g"
+reload_config = "prefix+shift+r"
+
+# Navigate Mode (Vim navigation inside Herdr menus/picker)
+navigate_pane_left = "h"
+navigate_pane_down = "j"
+navigate_pane_up = "k"
+navigate_pane_right = "l"
+navigate_workspace_up = "up"
+navigate_workspace_down = "down"
+
+[ui]
+# Cyberpunk / Hacker HUD styling
+accent = "#00ff66"
+status_indicators = "symbols"
+show_agent_labels_on_pane_borders = true
+pane_borders = true
+pane_outer_borders = true
+pane_gaps = true
+pane_scrollbars = false
+prompt_new_tab_name = false
+prompt_new_workspace_name = false
+tab_bar_position = "top"
+tab_bar_right = [
+    { type = "zoom" },
+    { type = "hostname" },
+    { type = "datetime" }
+]
+tab_bar_right_separator = "  //  "
+window_title = "HERDR // [ {workspace} ] > {pane}"
+
+[experimental]
+allow_nested = true
+pane_history = true

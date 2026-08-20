@@ -315,13 +315,27 @@ lua << EOF
 -- ============
 -- Core Requires
 -- ============
-local lspconfig          = require('lspconfig')
 local ts_tools           = require('typescript-tools')
 local conform            = require('conform')
 local treesitter_configs = require('nvim-treesitter.configs')
 local mason              = require('mason')
 local blink              = require('blink.cmp')
 local osc52              = require('osc52')
+
+-- ============
+-- LSP Setup Helper (Neovim 0.11+ vim.lsp.config & fallback)
+-- ============
+local function setup_lsp(name, config)
+  if vim.lsp and vim.lsp.config and vim.lsp.enable then
+    vim.lsp.config(name, config)
+    vim.lsp.enable(name)
+  else
+    local ok, lspconfig = pcall(require, 'lspconfig')
+    if ok and lspconfig[name] then
+      lspconfig[name].setup(config)
+    end
+  end
+end
 
 -- ============
 -- Treesitter
@@ -358,7 +372,7 @@ mason.setup()
 -- ============
 -- LSP: Go
 -- ============
-lspconfig.gopls.setup({
+setup_lsp('gopls', {
   on_attach = function(_, bufnr)
     local opts = { buffer = bufnr, noremap = true, silent = true }
     vim.keymap.set("n", "gd",         vim.lsp.buf.definition,        opts)
@@ -382,7 +396,7 @@ lspconfig.gopls.setup({
 -- ============
 -- LSP: Rust
 -- ============
-lspconfig.rust_analyzer.setup({
+setup_lsp('rust_analyzer', {
   settings = {
     ["rust-analyzer"] = {
       diagnostics = { enable = true },
@@ -616,17 +630,14 @@ indentscope.setup({
 -- Only enabled when bundle is available and project has sorbet/config
 -- ============
 do
-  local lspconfig = require("lspconfig")
-  local util      = require("lspconfig.util")
-
   -- Only try if `bundle` exists (so `bundle exec srb` can run)
   if vim.fn.executable("bundle") == 1 then
-    lspconfig.sorbet.setup({
+    setup_lsp("sorbet", {
       -- Run Sorbet in LSP mode through Bundler
       cmd = { "bundle", "exec", "srb", "tc", "--lsp", "--disable-watchman" },
 
       -- Only attach in projects that look like Sorbet projects
-      root_dir = util.root_pattern("sorbet/config", "Gemfile", ".git"),
+      root_markers = { "sorbet/config", "Gemfile", ".git" },
 
       single_file_support = false,
 

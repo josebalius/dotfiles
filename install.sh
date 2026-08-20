@@ -34,7 +34,7 @@ if [ "$OS" = "Linux" ]; then
     fi
 
     # Install Neovim for Linux if not present or needs update
-    if ! command -v nvim >/dev/null 2>&1 || [ ! -x "$(command -v nvim)" ]; then
+    if ! command -v nvim >/dev/null 2>&1 || ! nvim --version >/dev/null 2>&1; then
         if command -v modprobe >/dev/null 2>&1; then
             sudo modprobe fuse 2>/dev/null || true
         fi
@@ -52,6 +52,26 @@ if [ "$OS" = "Linux" ]; then
                 mv nvim-linux-x86_64.appimage "$HOME/.local/bin/nvim"
             }
         fi
+    fi
+
+    # Install Zellij for Linux if not present
+    if ! command -v zellij >/dev/null 2>&1; then
+        ZELLIJ_ARCH="x86_64"
+        if [ "$ARCH" = "aarch64" ] || [ "$ARCH" = "arm64" ]; then
+            ZELLIJ_ARCH="aarch64"
+        fi
+        TMP_DIR="/tmp/zellij-install-$$"
+        mkdir -p "$TMP_DIR"
+        if curl -sL "https://github.com/zellij-org/zellij/releases/latest/download/zellij-${ZELLIJ_ARCH}-unknown-linux-musl.tar.gz" | tar -xz -C "$TMP_DIR"; then
+            if [ -w /usr/local/bin ]; then
+                mv "$TMP_DIR/zellij" /usr/local/bin/zellij
+            else
+                mkdir -p "$HOME/.local/bin"
+                mv "$TMP_DIR/zellij" "$HOME/.local/bin/zellij"
+            fi
+            chmod +x "$HOME/.local/bin/zellij" 2>/dev/null || true
+        fi
+        rm -rf "$TMP_DIR"
     fi
 
 elif [ "$OS" = "Darwin" ]; then
@@ -107,6 +127,23 @@ EOF
             chmod +x "$HOME/.local/bin/nvim"
         fi
     fi
+
+    # Install Zellij for macOS if not present
+    if ! command -v zellij >/dev/null 2>&1; then
+        ZELLIJ_ARCH="aarch64"
+        if [ "$ARCH" = "x86_64" ]; then
+            ZELLIJ_ARCH="x86_64"
+        fi
+        TMP_DIR="/tmp/zellij-install-$$"
+        mkdir -p "$TMP_DIR"
+        if curl -sL "https://github.com/zellij-org/zellij/releases/latest/download/zellij-${ZELLIJ_ARCH}-apple-darwin.tar.gz" | tar -xz -C "$TMP_DIR"; then
+            mkdir -p "$HOME/.local/bin"
+            cp "$TMP_DIR/zellij" "$HOME/.local/bin/zellij"
+            chmod +x "$HOME/.local/bin/zellij"
+            xattr -dr com.apple.quarantine "$HOME/.local/bin/zellij" 2>/dev/null || true
+        fi
+        rm -rf "$TMP_DIR"
+    fi
 fi
 
 # ----------------------------------------------------
@@ -129,6 +166,8 @@ fi
 
 ln -sfn "$DOTFILES_DIR/config/nvim" "$HOME/.config/nvim"
 ln -sfn "$DOTFILES_DIR/config/zellij" "$HOME/.config/zellij"
+mkdir -p "$HOME/.config/herdr"
+ln -sfn "$DOTFILES_DIR/config/herdr/config.toml" "$HOME/.config/herdr/config.toml"
 
 # Ghostty config
 mkdir -p "$HOME/.config/ghostty"
